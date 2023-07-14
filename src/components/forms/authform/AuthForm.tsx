@@ -6,7 +6,7 @@ import { loginUser, registerUser } from "../../../api/auth";
 import { AxiosError } from "axios";
 import { Input } from "../../inputs/Input/Input";
 import { useNavigate } from "react-router-dom";
-
+import { mutate } from "swr";
 export const AuthForm = ({
   className,
   type,
@@ -21,11 +21,11 @@ export const AuthForm = ({
       const response =
         type === "register" ? await registerUser(data) : await loginUser(data);
       if (response.data.access_token) {
-        localStorage.setItem("auth_token", response.data.access_token);
+        localStorage.setItem("token", response.data.access_token);
       }
       setError("");
       navigate("/");
-      console.log(response);
+      mutate("user");
     } catch (e) {
       if (e instanceof AxiosError) {
         setError(e.response?.data.message);
