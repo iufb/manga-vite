@@ -1,5 +1,5 @@
 import { instance } from "../axios-client";
-import { formType } from "../../types/forms";
+import { formType } from "../../types/forms/authform.type";
 export const registerUser = (data: formType) => {
   return instance.post("/auth/register", data);
 };

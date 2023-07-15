@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { formType } from "../../../types/forms";
+import { formType } from "../../../types/forms/authform.type";
 import { useState } from "react";
 import { AuthFormProps } from "./AuthForm.props";
-import { loginUser, registerUser } from "../../../api/auth";
+import { loginUser, registerUser } from "../../../api/auth/auth";
 import { AxiosError } from "axios";
 import { Input } from "../../inputs/Input/Input";
 import { useNavigate } from "react-router-dom";

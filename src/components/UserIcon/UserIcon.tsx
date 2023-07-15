@@ -1,5 +1,5 @@
 import { UserIconProps } from "./UserIcon.props";
-
+import defaultUser from "../../assets/default-image.png";
 export const UserIcon = ({
   avatar,
   width,
@@ -10,7 +10,9 @@ export const UserIcon = ({
   return (
     <div {...props} className="cursor-pointer">
       <img
-        src={avatar ? `http://localhost:3000/${avatar}` : "/user.jpg"}
+        src={
+          avatar ? `${import.meta.env.VITE_API_HOST}/${avatar}` : defaultUser
+        }
         alt="user"
         width={width}
         height={height}

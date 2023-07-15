@@ -25,7 +25,7 @@ export const UserMenuModal = ({
           <FiSettings className="w-3 h-3" />
           Settings
         </Link>
-        <button onClick={() => logout()} className="flex gap-2 center">
+        <button onClick={logout} className="flex gap-2 center">
           <AiOutlineLogout className="w-3 h-3" />
           Log out
         </button>

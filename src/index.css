@@ -22,6 +22,9 @@ body {
   .readerLinkHover {
     @apply hover:bg-white hover:bg-opacity-10;
   }
+  .title {
+    @apply text-4xl text-gray-800;
+  }
 }
 /* width */
 ::-webkit-scrollbar {

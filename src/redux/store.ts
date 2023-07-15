@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import chapterReducer from "./features/chapter/chapterSlice";
 import modalReducer from "./features/modal/modalSlice";
 import pageReducer from "./features/page/pageSlice";
+import alertReducer from "./features/alert/alertSlice";
 export const store = configureStore({
   reducer: {
     chapter: chapterReducer,
     page: pageReducer,
     modal: modalReducer,
+    alert: alertReducer,
   },
 });
 
