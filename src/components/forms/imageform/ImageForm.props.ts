@@ -10,5 +10,5 @@ export interface ImageFormProps
   setImage: Dispatch<SetStateAction<File | Blob | null | undefined>>;
   label: string;
   imageFor: "default" | "bg";
-  deleteAvatar: () => void;
+  deleteAvatar?: () => void;
 }

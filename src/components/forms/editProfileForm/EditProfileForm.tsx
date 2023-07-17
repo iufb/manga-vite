@@ -2,15 +2,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { editProfileFormType } from "../../../types/forms/editProfileForm.type";
 import { EditProfileFormProps } from "./EditProfileForm.props";
 import { useState } from "react";
-import { mutate, useSWRConfig } from "swr";
+import { mutate } from "swr";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setAlert } from "../../../redux/features/alert/alertSlice";
 import { AxiosError } from "axios";
 import { updateUser } from "../../../api/user/user";
 import { upload } from "../../../api/upload/upload";
 import { ImageForm } from "../imageform/ImageForm";
-import { ImagePreview } from "../../ImagePreview/ImagePreview";
-import { useAuth } from "../../../hooks";
 
 export const EditProfileForm = ({
   className,
@@ -18,7 +16,6 @@ export const EditProfileForm = ({
 }: EditProfileFormProps) => {
   const { register, handleSubmit } = useForm<editProfileFormType>();
   const [error, setError] = useState("");
-  const { user } = useAuth();
   const [image, setImage] = useState<File | Blob | null | undefined>(null);
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<editProfileFormType> = async (data) => {

@@ -3,4 +3,5 @@ export interface PageContainerProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children: ReactNode;
   full?: boolean;
+  centered?: boolean;
 }

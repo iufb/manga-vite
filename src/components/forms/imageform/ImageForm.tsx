@@ -25,7 +25,7 @@ export const ImageForm = ({
         setIsValid={setIsValid}
         minWidth={imageFor == "bg" ? 1200 : undefined}
       />
-      {!image && (
+      {!image && deleteAvatar && (
         <ImagePreview
           src={user?.avatar}
           width={90}

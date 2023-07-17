@@ -1,2 +1,3 @@
 import { BaseLayout } from "./BaseLayout/BaseLayout";
-export { BaseLayout };
+import { ReaderLayout } from "./ReaderLayout/ReaderLayout";
+export { BaseLayout, ReaderLayout };
