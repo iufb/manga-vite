@@ -2,6 +2,8 @@ import useSWR from "swr";
 import { userType } from "../types/user.type";
 import fetcher from "../api/axios-client";
 export const useAuth = () => {
-  const { data: user } = useSWR<userType>("user", fetcher);
+  const { data: user } = useSWR<userType>("user", () =>
+    fetcher("user", `Bearer ${localStorage.getItem("token")}`)
+  );
   return { user };
 };

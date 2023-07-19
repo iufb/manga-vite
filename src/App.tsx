@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   AddChapterPage,
   AddComicPage,
+  CatalogPage,
   ComicPage,
   EditProfilePage,
   LoginPage,
@@ -21,6 +22,7 @@ function App() {
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="/" element={<BaseLayout />}>
+            <Route path="/catalog" element={<CatalogPage />} />
             <Route path="add" element={<AddComicPage />} />
             <Route path="user" element={<UserPage />} />
             <Route path="user/edit" element={<EditProfilePage />} />

@@ -22,8 +22,8 @@ export default {
         navbar: "100px",
       },
       backgroundImage: {
-        register: "url('./src/assets/bg-blur.jpg')",
-        login: "url('./src/assets/bg-wave.svg')",
+        register: "url('/bg-blur.jpg')",
+        login: "url('/bg-wave.svg')",
       },
       colors: {
         indigoGrey: "#6c8480",

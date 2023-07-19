@@ -1,12 +1,17 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ChapterNavigationProps } from "./ChapterNavigation.props";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { useAppDispatch } from "../../../redux/hooks";
+import { updateModalStatus } from "../../../redux/features/modal/modalSlice";
 
 export const ChapterNavigation = ({
+  chaptersQuantity,
   className,
   ...props
 }: ChapterNavigationProps): JSX.Element => {
   const { chapterNumber } = useParams();
+  const currentChapter = chapterNumber && Number(chapterNumber[1]);
+  const dispatch = useAppDispatch();
   return (
     <div className={`${className} center gap-1`} {...props}>
       <button
@@ -15,11 +20,24 @@ export const ChapterNavigation = ({
       >
         <MdArrowBackIos />
       </button>
-      <button className="readerLinkHover px-2 h-full ">
-        Chapter {chapterNumber && chapterNumber[1]}
+      <button
+        className="readerLinkHover p-2 h-full "
+        onClick={() =>
+          dispatch(
+            updateModalStatus({
+              modal: "chapterListModalState",
+              status: "open",
+            })
+          )
+        }
+      >
+        Chapter {currentChapter}
       </button>
 
-      <button className="h-full readerLinkHover px-3 py-4 center disabled:text-gray-100 disabled:cursor-not-allowed">
+      <button
+        className="h-full readerLinkHover px-3 py-4 center "
+        disabled={currentChapter == chaptersQuantity}
+      >
         <MdArrowForwardIos />
       </button>
     </div>

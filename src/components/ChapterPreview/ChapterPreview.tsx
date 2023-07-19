@@ -27,7 +27,7 @@ export const ChapterPreview = ({
               key={page}
               width={100}
               height={150}
-              className=" border-4 max-h-40 rounded-md border-gray-400 p-2"
+              className=" border-4 max-h-40 rounded-md border-gray-400 p-2 overflow-hidden"
             >
               <button
                 type="button"

@@ -1,39 +1,56 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../hooks";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { updateAuthModalStatus } from "../../../redux/features/modal/modalSlice";
+import { updateModalStatus } from "../../../redux/features/modal/modalSlice";
 import { UserIcon } from "../../UserIcon/UserIcon";
 import { UserMenuModal } from "../..";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { mutate } from "swr";
 const LoginOrRegister = () => (
-  <div className="flex gap-2 text-md">
-    <Link to={"/login"}>Login </Link>
-    or
-    <Link to={"/register"}>Register</Link>
+  <div className="flex gap-2 text-md center ">
+    <Link
+      to={"/login"}
+      className="p-2 rounded-md hover:bg-white hover:bg-opacity-30"
+    >
+      Login{" "}
+    </Link>
+
+    <Link
+      to={"/register"}
+      className="p-2 border border-customWhite rounded-md hover:bg-white hover:bg-opacity-30"
+    >
+      Register
+    </Link>
   </div>
 );
 export const AuthStatus = () => {
-  const { user: user } = useAuth();
+  const { user } = useAuth();
   const [token, setToken] = useState<string | null>(() =>
     localStorage.getItem("token")
   );
   const dispatch = useAppDispatch();
-  console.log(user);
   const logout = () => {
-    localStorage.removeItem("auth_token");
+    localStorage.removeItem("token");
     setToken(null);
-    dispatch(updateAuthModalStatus("close"));
+    dispatch(updateModalStatus({ status: "close", modal: "authModalState" }));
   };
   const { authModalState } = useAppSelector((state) => state.modal);
+  useEffect(() => {
+    mutate("user");
+  }, []);
   return (
     <div className="ml-10 relative">
-      {token && user ? (
+      {token ? (
         <div className=" gap-2 center w-[100px]  ">
           <UserIcon
-            avatar={user.avatar}
-            width={35}
-            height={40}
-            onClick={() => dispatch(updateAuthModalStatus("open"))}
+            avatar={user?.avatar}
+            width={50}
+            height={50}
+            onClick={() =>
+              dispatch(
+                updateModalStatus({ status: "open", modal: "authModalState" })
+              )
+            }
           />
         </div>
       ) : (

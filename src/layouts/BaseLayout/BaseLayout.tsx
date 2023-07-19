@@ -10,7 +10,7 @@ export const BaseLayout = ({
   return (
     <div className={`${className}  layout bg-lightGrey`} {...props}>
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 ">
         <Outlet />
       </main>
       <Footer />

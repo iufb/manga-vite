@@ -20,7 +20,7 @@ export const upload = ({
   if (secondFile) {
     form.append("file", secondFile, filename);
   }
-  return instance.post(`/files/upload/${type}`, form, {
+  return instance().post(`/files/upload/${type}`, form, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
