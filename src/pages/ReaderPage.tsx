@@ -1,3 +1,9 @@
+import { ChapterViewer, PageContainer } from "../components";
+
 export const ReaderPage = () => {
-  return <div>reader</div>;
+  return (
+    <PageContainer full bgColor="bg-gray-500">
+      <ChapterViewer />
+    </PageContainer>
+  );
 };

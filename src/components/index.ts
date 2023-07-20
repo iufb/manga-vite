@@ -5,6 +5,7 @@ import { UserMenuModal } from "./modals/UserMenuModal/UserMenuModal";
 import { EditProfileForm } from "./forms/editProfileForm/EditProfileForm";
 import { AddComicForm } from "./forms/addComicForm/AddComicForm";
 import { AddChapterForm } from "./forms/addChapterForm/AddChapterForm";
+import { ChapterViewer } from "./ChapterViewer/ChapterViewer";
 import { Comic } from "./Comic/Comic";
 import { ReaderHeader } from "./ReaderHeader/ReaderHeader";
 import { Footer } from "./Footer/Footer";
@@ -18,5 +19,6 @@ export {
   AddComicForm,
   ReaderHeader,
   AddChapterForm,
+  ChapterViewer,
   Footer,
 };

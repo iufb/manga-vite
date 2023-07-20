@@ -35,7 +35,7 @@ export const ChapterList = ({
       </div>
       {new Array(chaptersQuantity).fill(chaptersQuantity).map((_, idx) => (
         <Link
-          to={`/reader/${comicId}/c${idx + 1}`}
+          to={`/reader/${comicId}/${idx + 1}?page=1`}
           onClick={closeModal}
           key={idx}
           className="text-customWhite w-full hover:bg-opacity-70 hover:bg-gray-600 px-1"

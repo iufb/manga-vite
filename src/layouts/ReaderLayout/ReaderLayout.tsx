@@ -6,6 +6,7 @@ import { SlidePanel } from "../../components/SlidePanel/SlidePanel";
 import { useAppSelector } from "../../redux/hooks";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ChapterList } from "../../components/ChapterList/ChapterList";
+import { ReaderNavigation } from "../../components/ReaderHeader/ReaderNavigation/ReaderNavigation";
 
 export const ReaderLayout = ({
   className,
@@ -21,6 +22,7 @@ export const ReaderLayout = ({
         <main className="flex-1">
           <Outlet />
         </main>
+        <ReaderNavigation />
       </div>
       {sidebarModalState == "open" && (
         <ModalContainer center={false}>

@@ -66,7 +66,7 @@ export const ComicTabContent = ({
             {chapters.map((chapter) => (
               <div
                 onClick={() => {
-                  navigate(`/reader/${id}/c${chapter.chapterNumber}?page=1`);
+                  navigate(`/reader/${id}/${chapter.chapterNumber}?page=1`);
                 }}
                 key={chapter._id}
                 className="flex gap-2 hover:bg-gray-300 px-2"
