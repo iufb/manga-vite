@@ -2,18 +2,18 @@ import { ForwardedRef, forwardRef } from "react";
 import { SelectProps } from "./Select.props";
 
 export const Select = forwardRef(function Select(
-  { className, items, defaultVal, currentValue, ...props }: SelectProps,
+  { className, items, currentValue, ...props }: SelectProps,
   ref: ForwardedRef<HTMLSelectElement>
 ): JSX.Element {
   return (
     <select
-      className={`${className} select select-bordered select-md flex-1`}
+      className={`${className} min-w-[130px] border border-gray-300    select  select-text h-[26px] flex-1`}
       {...props}
+      value={currentValue}
       ref={ref}
     >
-      <option disabled>{defaultVal}</option>
-      {items.map((item, idx) => (
-        <option key={item} value={item} selected={currentValue == idx + 1}>
+      {items.map((item) => (
+        <option key={item} className={`bg-gray-900  text-customWhite`}>
           {item}
         </option>
       ))}

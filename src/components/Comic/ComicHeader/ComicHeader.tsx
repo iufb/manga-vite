@@ -6,7 +6,10 @@ export const ComicHeader = ({
   ...props
 }: ComicHeaderProps): JSX.Element => {
   return (
-    <header className={`${className} text-white text-3xl `} {...props}>
+    <header
+      className={`${className} desktop:text-white   mobile:text-gray-700 mobile:text-center  desktop:block desktop:bg-inherit mobile:bg-white mobile:rounded-t    desktop:text-3xl mobile:text-xl tablet:text-start `}
+      {...props}
+    >
       {title}
     </header>
   );

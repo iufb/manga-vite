@@ -5,6 +5,8 @@ import { ChapterPreviewProps } from "./ChapterPreview.props";
 import { FaSearchPlus } from "react-icons/fa";
 import { FileInput } from "../inputs/FileInput/FileInput";
 import { ModalContainer } from "../modals/ModalContainer/ModalContainer";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { updateModalStatus } from "../../redux/features/modal/modalSlice";
 
 export const ChapterPreview = ({
   pages,
@@ -13,7 +15,8 @@ export const ChapterPreview = ({
   ...props
 }: ChapterPreviewProps) => {
   const [selectedPage, setSelectedPage] = useState(0);
-  const [expandImage, setExpandImage] = useState(false);
+  const { previewModalState } = useAppSelector((state) => state.modal);
+  const dispatch = useAppDispatch();
   return (
     <div
       className={` ${className} w-full min-h-[500px] h-full  bg-white center p-10`}
@@ -34,7 +37,12 @@ export const ChapterPreview = ({
                 className="absolute  bottom-1 p-1 right-1 bg-indigoGrey rounded-md text-white"
                 onClick={() => {
                   setSelectedPage(idx);
-                  setExpandImage(true);
+                  dispatch(
+                    updateModalStatus({
+                      status: "open",
+                      modal: "previewModalState",
+                    })
+                  );
                 }}
               >
                 <FaSearchPlus />
@@ -45,11 +53,22 @@ export const ChapterPreview = ({
       ) : (
         <FileInput setFiles={setFiles} label="Select zip file with chapter" />
       )}
-      {expandImage && pages && (
-        <ModalContainer>
-          <ImagePreview src={pages[selectedPage]} width={500} height={600}>
+      {previewModalState == "open" && pages && (
+        <ModalContainer scroll>
+          <ImagePreview
+            src={pages[selectedPage]}
+            width={700}
+            className=" relative"
+          >
             <button
-              onClick={() => setExpandImage(false)}
+              onClick={() =>
+                dispatch(
+                  updateModalStatus({
+                    status: "close",
+                    modal: "previewModalState",
+                  })
+                )
+              }
               className="absolute  top-1 right-1 p-2 bg-indigoGrey bg-opacity-50 hover:bg-opacity-100 text-white "
             >
               <AiOutlineClose />

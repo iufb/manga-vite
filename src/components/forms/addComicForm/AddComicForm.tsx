@@ -17,6 +17,7 @@ import { MultiSelect } from "../../Select/MultiSelect/MultiSelect";
 import { Select } from "../../Select/Select";
 import { createComic } from "../../../api/comic/comic";
 import { useNavigate } from "react-router-dom";
+import { Textarea } from "../../inputs/Textarea/Textarea";
 
 export const AddComicForm = ({
   className,
@@ -59,7 +60,7 @@ export const AddComicForm = ({
   };
   return (
     <form
-      className={`${className} w-full  h-full  col gap-4 mobile:px-4 tablet:px-10  desktop:tablet:px-20 `}
+      className={`${className} w-full  h-full  col gap-4 mobile:px-4 tablet:px-10  desktop:px-20 `}
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -82,24 +83,29 @@ export const AddComicForm = ({
           {...register(registerProp, { required: true })}
         />
       ))}
-
       <MultiSelect
         items={genres}
         title="Genres"
         state={selectedGenres}
         setState={setSelectedGenres}
       />
-      <div className="flex gap-2 w-full ">
+      <div className="tablet:flex-row gap-2 mobile:col w-full h-full  ">
         {newComicSelects.map(({ items, defaultValue, registerProp }) => (
           <Select
             key={defaultValue}
             items={items}
-            defaultVal={defaultValue}
             {...register(registerProp)}
           />
         ))}
       </div>
-      <button type="submit" className="btn btn-sm w-20">
+      <Textarea
+        {...register("description", { required: true })}
+        label="Description"
+      />
+      <button
+        type="submit"
+        className="btn btn-sm bg-indigoGrey text-customWhite hover:bg-indigoLight w-20"
+      >
         Create
       </button>
     </form>

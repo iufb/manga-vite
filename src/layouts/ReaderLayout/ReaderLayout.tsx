@@ -3,10 +3,12 @@ import { ReaderLayoutProps } from "./ReaderLayout.props";
 import { ReaderHeader } from "../../components";
 import { ModalContainer } from "../../components/modals/ModalContainer/ModalContainer";
 import { SlidePanel } from "../../components/SlidePanel/SlidePanel";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ChapterList } from "../../components/ChapterList/ChapterList";
 import { ReaderNavigation } from "../../components/ReaderHeader/ReaderNavigation/ReaderNavigation";
+import { useEffect } from "react";
+import { updateAllModals } from "../../redux/features/modal/modalSlice";
 
 export const ReaderLayout = ({
   className,
@@ -15,14 +17,21 @@ export const ReaderLayout = ({
   const { sidebarModalState, chapterListModalState } = useAppSelector(
     (state) => state.modal
   );
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(updateAllModals("close"));
+  }, []);
   return (
     <>
-      <div className={`${className} layout bg-gray-500 `} {...props}>
+      <div
+        className={`${className} layout bg-gray-500 relative min-h-screen h-full `}
+        {...props}
+      >
         <ReaderHeader />
-        <main className="flex-1">
+        <main className={`flex-1`}>
           <Outlet />
+          <ReaderNavigation className="sticky z-50 left-5 bottom-5" />
         </main>
-        <ReaderNavigation />
       </div>
       {sidebarModalState == "open" && (
         <ModalContainer center={false}>

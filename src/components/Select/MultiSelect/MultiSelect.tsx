@@ -26,14 +26,17 @@ export const MultiSelect = ({
     setState([...state.filter((value) => value !== item)]);
   };
   return (
-    <div className={`flex flex-col ${className}`} {...props}>
+    <div
+      className={`flex flex-col ${className} border border-gray-300`}
+      {...props}
+    >
       <div
         className={`flex ${
           isFocus && "border"
         } border-indigoGrey p-2 rounded-md  `}
       >
         {state.length > 0 && (
-          <div className="flex  gap-2 top-2 px-2   ">
+          <div className="flex  gap-2 top-2 px-2  flex-wrap max-w-[400px] ">
             {state.map((value, idx) => (
               <div
                 key={idx}
@@ -51,7 +54,7 @@ export const MultiSelect = ({
           onChange={handleChange}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
-          className={`  flex-1 w-full pl-2 focus:outline-none py-2`}
+          className={`  flex-1 w-full pl-2 focus:outline-none py-2 h-fit my-auto border border-gray-300`}
         />
       </div>
       <datalist id="select">

@@ -1,9 +1,4 @@
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import fetcher from "../../api/axios-client";
 import { ChapterViewerProps } from "./ChapterViewer.props";
 import useSWR from "swr";
@@ -12,6 +7,7 @@ import { useEffect } from "react";
 import { useImageLoading } from "../../hooks/useImageLoading";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setPagesQuantity } from "../../redux/features/chapter/chapterSlice";
+import { scrollToTop } from "../../utils/helpers";
 export const ChapterViewer = ({
   className,
   ...props
@@ -30,14 +26,12 @@ export const ChapterViewer = ({
   const imageUrl = `${data?.baseUrl}/${currentPage}.webp`;
   const { loading, setLoading } = useImageLoading(imageUrl);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [currentPage]);
-  useEffect(() => {
     data && dispatch(setPagesQuantity(data?.pagesQuantity));
     console.log(data?.pagesQuantity);
   }, [data]);
   const goForward = () => {
     setLoading(true);
+    scrollToTop();
     if (currentPage == data?.pagesQuantity) {
       if (Number(chapterNumber) == chaptersQuantity) {
         navigate(`/comic/${comicId}`);
@@ -51,6 +45,7 @@ export const ChapterViewer = ({
   };
   const goBack = () => {
     setLoading(true);
+    scrollToTop();
     if (currentPage == 1) {
       if (Number(chapterNumber) == 1) {
         navigate(`/comic/${comicId}`);
@@ -66,6 +61,9 @@ export const ChapterViewer = ({
     }
     navigate(`?page=${currentPage - 1}`);
   };
+  const { globalModal } = useAppSelector((state) => state.modal);
+  console.log(globalModal);
+
   return (
     <div className={`${className} relative`} {...props}>
       {currentPage && (
@@ -75,9 +73,14 @@ export const ChapterViewer = ({
             onClick={goBack}
           />
           {loading ? (
-            <div className="text-customWhite text-4xl">Loading</div>
+            <div className="text-customWhite bg-gray-900 text-4xl w-[700px] h-screen center">
+              <img src="/loader.gif" />
+            </div>
           ) : (
-            <ImagePreview src={`${data?.baseUrl}/${currentPage}.webp`} />
+            <ImagePreview
+              src={`${data?.baseUrl}/${currentPage}.webp`}
+              className={` `}
+            />
           )}
           <div
             className="absolute right-0 top-0 z-40 w-[50%] h-full cursor-pointer"

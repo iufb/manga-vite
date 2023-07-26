@@ -58,7 +58,7 @@ export const FileInput = ({
       />
       {file && (
         <ModalContainer>
-          <div className="w-full  max-w-[500px] bg-indigoGrey center h-full flex-col gap-4 p-5 rounded-md">
+          <div className="w-full h-fit max-h-[230px]  max-w-[500px] bg-indigoGrey center  flex-col gap-4 p-5 rounded-md">
             <div className="w-full flex flex-col gap-1">
               <div className="flex gap-2 text-white">
                 <span className="flex-1 truncate">{file.name}</span>

@@ -11,7 +11,7 @@ body {
 
 @layer base {
   .layout {
-    @apply w-full h-screen  flex col;
+    @apply w-full  col;
   }
   .center {
     @apply flex justify-center items-center;
@@ -24,6 +24,9 @@ body {
   }
   .title {
     @apply text-4xl text-gray-800;
+  }
+  .iconBtn {
+    @apply p-1 bg-gray-300 hover:scale-105;
   }
   .slide {
     position: fixed;
@@ -55,7 +58,7 @@ body {
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 9px;
 }
 
 /* Track */

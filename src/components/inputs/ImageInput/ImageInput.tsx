@@ -44,7 +44,7 @@ export const ImageInput = forwardRef(function ImageInput(
         };
       };
     }
-    e.target.value = ""; // can select the same file.
+    e.target.value = ""; // can select the same image.
   };
 
   return (

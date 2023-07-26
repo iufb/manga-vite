@@ -3,7 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/**/**/*.{js,ts,jsx,tsx}",
-    "./src/pages/*.{tsx}",
+    "./src/pages/*.tsx",
   ],
   theme: {
     screens: {
@@ -17,9 +17,11 @@ export default {
       gridTemplateColumns: {
         navbar: "100px 1fr 100px",
         userHeader: "52px 1fr 200px",
+        comicDesktop: "270px 1fr",
       },
       gridTemplateRows: {
         navbar: "100px",
+        comicDesktop: "40px auto 60px 1fr",
       },
       backgroundImage: {
         register: "url('/bg-blur.jpg')",

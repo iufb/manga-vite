@@ -5,6 +5,5 @@ export interface SelectProps
     HTMLSelectElement
   > {
   items: string[] | number[];
-  defaultVal: string | number;
-  currentValue?: number;
+  currentValue?: string;
 }

@@ -5,6 +5,7 @@ import { ImagePreview } from "../../ImagePreview/ImagePreview";
 import { CropImageModal } from "../../modals/CropImageModal/CropImageModal";
 import { ModalContainer } from "../../modals/ModalContainer/ModalContainer";
 import { useAuth } from "../../../hooks";
+import { AiOutlineDelete } from "react-icons/ai";
 
 export const ImageForm = ({
   image,
@@ -31,7 +32,14 @@ export const ImageForm = ({
           width={90}
           height={90}
           deleteImage={user?.avatar ? deleteAvatar : undefined}
-        />
+        >
+          <button
+            className="absolute  iconBtn top-0 left-0"
+            onClick={deleteAvatar}
+          >
+            <AiOutlineDelete className=" fill-gray-700   " />
+          </button>
+        </ImagePreview>
       )}
       {image && isValid && (
         <ImagePreview
@@ -39,10 +47,14 @@ export const ImageForm = ({
           local
           height={imageFor == "default" ? 90 : 200}
           src={URL.createObjectURL(image)}
-          deleteImage={() => {
-            setImage(null);
-          }}
-        />
+        >
+          <button
+            className="absolute iconBtn top-0 left-0"
+            onClick={() => setImage(null)}
+          >
+            <AiOutlineDelete className="fill-gray-700  " />
+          </button>
+        </ImagePreview>
       )}
       {!isValid && image && (
         <ModalContainer>

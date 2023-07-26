@@ -77,11 +77,6 @@ export const newComicInputs: {
     registerProp: "alternativeTitle",
   },
   {
-    label: "Description",
-    registerProp: "description",
-  },
-
-  {
     label: "Author",
     registerProp: "author",
   },

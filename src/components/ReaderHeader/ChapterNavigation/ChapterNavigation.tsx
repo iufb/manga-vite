@@ -27,7 +27,7 @@ export const ChapterNavigation = ({
             <MdArrowBackIos />
           </button>
           <button
-            className="readerLinkHover p-2 h-full "
+            className="readerLinkHover p-2 h-full mobile:p-1 mobile:text-sm tablet:text-lg flex gap-1 "
             onClick={() =>
               dispatch(
                 updateModalStatus({
@@ -37,7 +37,8 @@ export const ChapterNavigation = ({
               )
             }
           >
-            Chapter {currentChapter}
+            <span className="mobile:hidden tablet:block">Chapter</span>{" "}
+            {currentChapter}
           </button>
 
           <button

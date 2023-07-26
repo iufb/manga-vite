@@ -9,9 +9,9 @@ export const PageContainer = ({
   ...props
 }: PageContainerProps) => (
   <div
-    className={`${className}  w-full ${full ? "h-full" : "h-screen"} ${
+    className={`${className}  w-full ${full ? "h-fit" : "h-screen"} ${
       centered && "col center"
-    } ${bgColor} `}
+    } ${bgColor}  `}
     {...props}
   >
     {children}

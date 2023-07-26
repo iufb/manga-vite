@@ -72,7 +72,9 @@ export const ComicTabContent = ({
                 className="flex gap-2 hover:bg-gray-300 px-2"
               >
                 <span className="">Chapter {chapter.chapterNumber}.</span>
-                <span>{chapter.name}</span>
+                <span className="mobile:hidden tablet:block">
+                  {chapter.name}
+                </span>
                 <span className="flex-1 text-end">
                   {new Date(chapter.createdAt)
                     .toLocaleDateString("en-GB", {
