@@ -47,7 +47,7 @@ export const EditProfileForm = ({
   };
   return (
     <form
-      className={`${className} w-full max-w-[900px]   col gap-4 mobile:px-4 tablet:px-10  desktop:tablet:px-20`}
+      className={`${className} w-full max-w-[900px]   col gap-4 mobile:px-4 tablet:px-10  desktop:tablet:px-20 `}
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -56,7 +56,7 @@ export const EditProfileForm = ({
         image={image}
         setImage={setImage}
         label="Avatar: "
-        imageFor="default"
+        imageFor="avatar"
       />
 
       <label className="input-group ">
@@ -67,7 +67,10 @@ export const EditProfileForm = ({
         />
       </label>
       {error && <p className=" text-red-600">{error}</p>}
-      <button type="submit" className="btn ">
+      <button
+        type="submit"
+        className="btn bg-indigoGrey text-customWhite hover:bg-indigoLight "
+      >
         Save
       </button>
     </form>

@@ -57,8 +57,7 @@ export const ChapterPreview = ({
         <ModalContainer scroll>
           <ImagePreview
             src={pages[selectedPage]}
-            width={700}
-            className=" relative"
+            className=" relative desktop:w-[700px] mobile:w-[360px]"
           >
             <button
               onClick={() =>

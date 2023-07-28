@@ -24,7 +24,7 @@ export const ImageForm = ({
         setImage={setImage}
         label={label}
         setIsValid={setIsValid}
-        minWidth={imageFor == "bg" ? 1200 : undefined}
+        minWidth={imageFor == "comicBg" ? 1200 : undefined}
       />
       {!image && deleteAvatar && (
         <ImagePreview
@@ -43,9 +43,9 @@ export const ImageForm = ({
       )}
       {image && isValid && (
         <ImagePreview
-          width={imageFor == "default" ? 90 : 400}
+          width={imageFor == "avatar" || imageFor == "comicCover" ? 90 : 400}
           local
-          height={imageFor == "default" ? 90 : 200}
+          height={imageFor == "avatar" || imageFor == "comicCover" ? 90 : 200}
           src={URL.createObjectURL(image)}
         >
           <button

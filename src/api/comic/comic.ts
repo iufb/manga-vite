@@ -8,3 +8,6 @@ export const createComic = async (data: IComic) => {
 export const getComic = async (id: string) => {
   return instance().get<IComic>(`comic/${id}`);
 };
+export const deleteComic = async (id: string) => {
+  return instance().delete(`comic/${id}`);
+};

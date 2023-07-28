@@ -8,6 +8,7 @@ import { AddChapterForm } from "./forms/addChapterForm/AddChapterForm";
 import { ChapterViewer } from "./ChapterViewer/ChapterViewer";
 import { Comic } from "./Comic/Comic";
 import { ReaderHeader } from "./ReaderHeader/ReaderHeader";
+import { Catalog } from "./Catalog/Catalog";
 import { Footer } from "./Footer/Footer";
 export {
   AuthForm,
@@ -20,5 +21,6 @@ export {
   ReaderHeader,
   AddChapterForm,
   ChapterViewer,
+  Catalog,
   Footer,
 };

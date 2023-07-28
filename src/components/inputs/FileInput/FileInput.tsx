@@ -42,10 +42,10 @@ export const FileInput = ({
     });
   };
   return (
-    <div className={`${className}`} {...props}>
+    <div className={`${className} text-center`} {...props}>
       <label
         htmlFor="file"
-        className="cursor-pointer text-2xl text-indigoGrey font-bold"
+        className="cursor-pointer  text-2xl text-indigoGrey font-bold"
       >
         {label}
       </label>

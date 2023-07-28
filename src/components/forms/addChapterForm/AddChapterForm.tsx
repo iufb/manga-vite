@@ -44,15 +44,15 @@ export const AddChapterForm = ({
   return (
     <>
       <form
-        className={`${className}  max-w-[1320px] w-full flex flex-col gap-4 h-full my-10`}
+        className={`${className}  max-w-[1320px] w-full flex flex-col gap-4 h-full my-10 mobile:px-4 desktop:px-0`}
         {...props}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex gap-2 w-full">
+        <div className="flex mobile:flex-col desktop:flex-row  gap-2 w-full">
           <Input
             title="№"
             type="number"
-            className="input-sm w-fit "
+            className="input-sm desktop:w-fit mobile:w-full "
             {...register("chapterNumber", { required: true })}
           />
           <Input

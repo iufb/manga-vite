@@ -9,6 +9,6 @@ export interface ImageFormProps
   image: File | Blob | null | undefined;
   setImage: Dispatch<SetStateAction<File | Blob | null | undefined>>;
   label: string;
-  imageFor: "default" | "bg";
+  imageFor: "avatar" | "comicBg" | "comicCover";
   deleteAvatar?: () => void;
 }

@@ -17,12 +17,9 @@ export const BaseLayout = ({
   console.log(globalModal);
   return (
     <>
-      <div
-        className={`${className}  layout bg-lightGrey  h-screen `}
-        {...props}
-      >
+      <div className={`${className}  layout h-screen `} {...props}>
         <Navbar />
-        <main className={`flex-1  `}>
+        <main className={` bg-lightGrey center `}>
           <Outlet />
         </main>
         <Footer />

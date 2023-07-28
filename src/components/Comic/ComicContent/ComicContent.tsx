@@ -5,6 +5,7 @@ import { ComicInfo } from "../ComicInfo/ComicInfo";
 import { ComicTabContent } from "../ComicTabContent/ComicTabContent";
 import { ComicContentProps } from "./ComicContent.props";
 import { Link } from "react-router-dom";
+import { deleteComic } from "../../../api/comic/comic";
 
 export const ComicContent = ({
   comic,
@@ -43,6 +44,13 @@ export const ComicContent = ({
       />
       <div className="desktop:col-start-1 desktop:col-end-2 desktop:row-start-3 desktop:row-end-4 text-3xl z-50">
         buttons
+        <button
+          onClick={() => {
+            deleteComic(comic._id);
+          }}
+        >
+          delete comic
+        </button>
       </div>
     </div>
   );

@@ -65,13 +65,13 @@ export const AddComicForm = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <ImageForm
-        imageFor="default"
+        imageFor="comicCover"
         image={comicCover}
         setImage={setComicCover}
         label="Comic cover:"
       />
       <ImageForm
-        imageFor="bg"
+        imageFor="comicBg"
         image={comicBg}
         setImage={setComicBg}
         label="Comic background:"
