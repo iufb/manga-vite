@@ -9,6 +9,7 @@ import { ChapterList } from "../../components/ChapterList/ChapterList";
 import { ReaderNavigation } from "../../components/ReaderHeader/ReaderNavigation/ReaderNavigation";
 import { useEffect } from "react";
 import { updateAllModals } from "../../redux/features/modal/modalSlice";
+import { AnimatePresence } from "framer-motion";
 
 export const ReaderLayout = ({
   className,
@@ -33,20 +34,22 @@ export const ReaderLayout = ({
           <ReaderNavigation className="sticky z-50 left-5 bottom-5" />
         </main>
       </div>
-      {sidebarModalState == "open" && (
-        <ModalContainer center={false}>
-          <SlidePanel position="left" modal="sidebarModalState">
-            <Sidebar />
-          </SlidePanel>
-        </ModalContainer>
-      )}
-      {chapterListModalState == "open" && (
-        <ModalContainer center={false}>
-          <SlidePanel position="right" modal="chapterListModalState">
-            <ChapterList />
-          </SlidePanel>
-        </ModalContainer>
-      )}
+      <AnimatePresence>
+        {sidebarModalState == "open" && (
+          <ModalContainer center={false}>
+            <SlidePanel position="left" modal="sidebarModalState">
+              <Sidebar />
+            </SlidePanel>
+          </ModalContainer>
+        )}
+        {chapterListModalState == "open" && (
+          <ModalContainer center={false}>
+            <SlidePanel position="right" modal="chapterListModalState">
+              <ChapterList />
+            </SlidePanel>
+          </ModalContainer>
+        )}
+      </AnimatePresence>
     </>
   );
 };

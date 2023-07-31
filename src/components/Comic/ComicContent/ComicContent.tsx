@@ -30,7 +30,7 @@ export const ComicContent = ({
       </ImagePreview>
       <ComicHeader
         title={comic.title}
-        className="mobile:-mt-20 desktop:-mt-0 desktop:col-start-2 desktop:col-end-3 desktop:row-start-1 desktop:row-end-2 z-50"
+        className="mobile:-mt-20 desktop:-mt-0 desktop:col-start-2 desktop:col-end-3 desktop:row-start-1 desktop:row-end-2 z-30"
       />
       <ComicInfo
         comic={comic}

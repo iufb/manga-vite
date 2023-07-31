@@ -1,4 +1,18 @@
 export const transition = { type: "spring", duration: 0.8 };
+export const secondLayerAnimation = {
+  initial: {
+    width: 0,
+    opacity: 0,
+  },
+  animate: {
+    width: 298,
+    opacity: 1,
+  },
+  exit: {
+    width: 0,
+    opacity: 0,
+  },
+};
 export const slideAnimation = (direction: string) => {
   return {
     initial: {

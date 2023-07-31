@@ -18,10 +18,13 @@ export default {
         navbar: "100px 1fr 100px",
         userHeader: "52px 1fr 200px",
         comicDesktop: "270px 1fr",
+        catalog: "1fr auto",
       },
       gridTemplateRows: {
         navbar: "100px",
         comicDesktop: "40px auto 60px 1fr",
+        layout: "auto 1fr auto",
+        catalog: "300px 1fr",
       },
       backgroundImage: {
         register: "url('/bg-blur.jpg')",

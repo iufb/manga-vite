@@ -1,38 +1,56 @@
 import { CatalogProps } from "./Catalog.props";
-import useSWR from "swr";
 import { IComic } from "../../types/comic.type";
 import { ComicCard } from "../Comic/ComicCard/ComicCard";
-import fetcher from "../../api/axios-client";
+import { useEffect, useState } from "react";
+import { findByTitle, getAllComics } from "../../api/comic/comic";
+import { FilterForm } from "../forms/filterForm/FilterForm";
 
 export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
-  const { data: comics } = useSWR<IComic[]>(`comic/type/Manga`, fetcher);
+  const [search, setSearch] = useState<string>("");
+  const [comics, setComics] = useState<IComic[]>([]);
+  const handleEnter = (e: React.KeyboardEvent) => {
+    if (e.code == "Enter") {
+      search == ""
+        ? getAllComics().then(({ data }) => setComics(data))
+        : findByTitle(search).then(({ data }) => setComics(data));
+    }
+  };
+  useEffect(() => {
+    getAllComics().then(({ data }) => setComics(data));
+  }, []);
   return (
-    <div className={`${className} flex gap-5 relative`} {...props}>
-      <div className={`bg-customWhite p-10`}>
-        <h1 className="text-2xl">Catalog</h1>
-        <div className="grid desktop:grid-cols-5 tablet:grid-cols-4 mobile:grid-cols-2  gap-2 overflow-y-scroll">
-          {comics &&
-            comics
-              .concat(comics)
-              .concat(comics)
-              .concat(comics)
-              .concat(comics)
-              .concat(comics)
-              .map(({ comicCover, title, _id, type }) => (
-                <ComicCard
-                  type={type}
-                  cover={comicCover}
-                  name={title}
-                  key={title}
-                  to={`/comic/${_id}`}
-                />
-              ))}
+    <div
+      className={`${className} grid grid-cols-catalog gap-5 relative  justify-center items-start my-5  w-full h-full  `}
+      {...props}
+    >
+      <div className={`bg-customWhite py-3 px-4 rounded-md`}>
+        <h1 className="text-2xl mb-3">Catalog</h1>
+        <input
+          className="w-full px-2 py-1 focus:outline-indigoLight mb-3"
+          placeholder="Find comic by title..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleEnter}
+        />
+        <div className="grid desktop:grid-cols-5 tablet:grid-cols-4 mobile:grid-cols-2  gap-2 w-[830px] min-h-[111px]">
+          {comics.length > 0 ? (
+            comics.map(({ comicCover, title, _id, type }) => (
+              <ComicCard
+                type={type}
+                cover={comicCover}
+                name={title}
+                key={title}
+                to={`/comic/${_id}`}
+              />
+            ))
+          ) : (
+            <div className="text-center text-gray-400 text-md col-start-3 col-end-4  center">
+              Nothing was found
+            </div>
+          )}
         </div>
       </div>
-
-      <div className="w-[314px] h-full bg-customWhite fixed right-0">
-        filter
-      </div>
+      <FilterForm className="col-start-2 col-end-3 row-start-1 row-end-3" />
     </div>
   );
 };

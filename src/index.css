@@ -7,11 +7,12 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 100%;
 }
 
 @layer base {
   .layout {
-    @apply w-full  col;
+    @apply w-full grid grid-rows-layout;
   }
   .center {
     @apply flex justify-center items-center;
@@ -23,7 +24,7 @@ body {
     @apply hover:bg-white hover:bg-opacity-10 hover:disabled:bg-opacity-0 disabled:text-gray-500;
   }
   .title {
-    @apply text-4xl text-gray-800;
+    @apply text-3xl text-gray-800;
   }
   .iconBtn {
     @apply p-1 bg-gray-300 hover:scale-105;

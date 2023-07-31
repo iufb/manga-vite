@@ -8,7 +8,7 @@ import { updateModalStatus } from "../../redux/features/modal/modalSlice";
 export const Navbar = () => {
   const dispatch = useAppDispatch();
   return (
-    <header className="  py-2   desktop:px-56 laptop:px-44 tablet:px-32 mobile:px-5   bg-indigoGrey  text-customWhite ">
+    <header className="  py-2 sticky z-40 top-0 left-0 w-full   desktop:px-56 laptop:px-44 tablet:px-32 mobile:px-5   bg-indigoGrey  text-customWhite ">
       <RxHamburgerMenu
         className="w-8  h-8 active:scale-110 tablet:hidden"
         onClick={() => {
@@ -18,7 +18,7 @@ export const Navbar = () => {
         }}
       />
       <nav className="w-full  grid-cols-navbar mobile:hidden tablet:grid  ">
-        <Link to={"/"} className="font-bold text-2xl cursor-pointer ">
+        <Link to={"/"} className="font-bold text-2xl cursor-pointer center ">
           Manga
         </Link>
         <Navlinks />
