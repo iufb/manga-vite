@@ -36,14 +36,14 @@ export const ReaderLayout = ({
       </div>
       <AnimatePresence>
         {sidebarModalState == "open" && (
-          <ModalContainer center={false}>
+          <ModalContainer center={false} key="sidebar">
             <SlidePanel position="left" modal="sidebarModalState">
               <Sidebar />
             </SlidePanel>
           </ModalContainer>
         )}
         {chapterListModalState == "open" && (
-          <ModalContainer center={false}>
+          <ModalContainer center={false} key="chapterlist">
             <SlidePanel position="right" modal="chapterListModalState">
               <ChapterList />
             </SlidePanel>

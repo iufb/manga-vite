@@ -1,4 +1,5 @@
 import { IComic } from "../../types/comic.type";
+import { filterFormType } from "../../types/forms/filterForm.type";
 import { instance } from "../axios-client";
 
 export const createComic = async (data: IComic) => {
@@ -19,4 +20,7 @@ export const deleteComic = async (id: string) => {
 };
 export const findByTitle = async (title: string) => {
   return instance().get<IComic[]>(`comic/search/${title}`);
+};
+export const filterComics = async (filter: filterFormType) => {
+  return instance().post<IComic[]>("comic/filter", filter);
 };

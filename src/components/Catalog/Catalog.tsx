@@ -8,15 +8,18 @@ import { FilterForm } from "../forms/filterForm/FilterForm";
 export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
   const [search, setSearch] = useState<string>("");
   const [comics, setComics] = useState<IComic[]>([]);
+  const updateCatalog = (comics: IComic[]) => {
+    setComics(comics);
+  };
   const handleEnter = (e: React.KeyboardEvent) => {
     if (e.code == "Enter") {
       search == ""
-        ? getAllComics().then(({ data }) => setComics(data))
-        : findByTitle(search).then(({ data }) => setComics(data));
+        ? getAllComics().then(({ data }) => updateCatalog(data))
+        : findByTitle(search).then(({ data }) => updateCatalog(data));
     }
   };
   useEffect(() => {
-    getAllComics().then(({ data }) => setComics(data));
+    getAllComics().then(({ data }) => updateCatalog(data));
   }, []);
   return (
     <div
@@ -32,7 +35,7 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleEnter}
         />
-        <div className="grid desktop:grid-cols-5 tablet:grid-cols-4 mobile:grid-cols-2  gap-2 w-[830px] min-h-[111px]">
+        <div className="grid desktop:grid-cols-5 tablet:grid-cols-4 mobile:grid-cols-2  gap-2 w-[830px] min-h-[111px] overlflow-y-scroll">
           {comics.length > 0 ? (
             comics.map(({ comicCover, title, _id, type }) => (
               <ComicCard
@@ -50,7 +53,10 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
           )}
         </div>
       </div>
-      <FilterForm className="col-start-2 col-end-3 row-start-1 row-end-3" />
+      <FilterForm
+        className="col-start-2 col-end-3 row-start-1 row-end-3 "
+        setComics={updateCatalog}
+      />
     </div>
   );
 };

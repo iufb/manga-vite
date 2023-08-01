@@ -28,7 +28,7 @@ export const BaseLayout = ({
       </div>
       <AnimatePresence>
         {sidebarModalState == "open" && (
-          <ModalContainer center={false}>
+          <ModalContainer center={false} key="modal">
             <SlidePanel position="left" modal="sidebarModalState">
               <Sidebar />
             </SlidePanel>

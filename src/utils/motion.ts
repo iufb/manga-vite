@@ -2,15 +2,29 @@ export const transition = { type: "spring", duration: 0.8 };
 export const secondLayerAnimation = {
   initial: {
     width: 0,
+    height: 0,
     opacity: 0,
   },
   animate: {
     width: 298,
+    height: 720,
     opacity: 1,
   },
   exit: {
     width: 0,
+    height: 0,
     opacity: 0,
+  },
+};
+export const filterFormAnimation = {
+  initial: {
+    height: 440,
+  },
+  animate: {
+    height: 780,
+  },
+  exit: {
+    height: 440,
   },
 };
 export const slideAnimation = (direction: string) => {
