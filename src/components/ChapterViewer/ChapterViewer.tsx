@@ -79,7 +79,7 @@ export const ChapterViewer = ({
           ) : (
             <ImagePreview
               src={`${data?.baseUrl}/${currentPage}.webp`}
-              className={` `}
+              className={`desktop:max-w-[1200px]`}
             />
           )}
           <div

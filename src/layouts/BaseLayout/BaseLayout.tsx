@@ -20,7 +20,7 @@ export const BaseLayout = ({
     <>
       <div className={`${className}  layout h-screen `} {...props}>
         <Navbar />
-        <main className={` bg-lightGrey   `}>
+        <main className={` bg-lightGrey    h-full `}>
           <Outlet />
         </main>
 

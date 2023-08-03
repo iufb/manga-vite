@@ -1,4 +1,5 @@
 import { LoginPage } from "./LoginPage";
+import { HomePage } from "./HomePage";
 import { RegisterPage } from "./RegisterPage";
 import { EditProfilePage } from "./EditProfilePage";
 import { UserPage } from "./UserPage";
@@ -8,6 +9,7 @@ import { AddChapterPage } from "./AddChapterPage";
 import { ReaderPage } from "./ReaderPage";
 import { CatalogPage } from "./CatalogPage";
 export {
+  HomePage,
   LoginPage,
   RegisterPage,
   ReaderPage,

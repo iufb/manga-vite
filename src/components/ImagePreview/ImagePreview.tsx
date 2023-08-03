@@ -23,6 +23,7 @@ export const ImagePreview = ({
       <img
         width={width}
         height={height}
+        className={`${className}`}
         src={src ? imageSrc : defaultUser}
         alt={"preview"}
       />

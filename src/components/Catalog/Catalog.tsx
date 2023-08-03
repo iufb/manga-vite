@@ -4,6 +4,7 @@ import { ComicCard } from "../Comic/ComicCard/ComicCard";
 import { useEffect, useState } from "react";
 import { findByTitle, getAllComics } from "../../api/comic/comic";
 import { FilterForm } from "../forms/filterForm/FilterForm";
+import { Loader } from "../Loader/Loader";
 
 export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
   const [search, setSearch] = useState<string>("");
@@ -35,7 +36,10 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleEnter}
         />
-        <div className="grid desktop:grid-cols-5 tablet:grid-cols-4 mobile:grid-cols-2  gap-2 w-[830px] min-h-[111px] overlflow-y-scroll">
+        <div className="grid desktop:grid-cols-5 tablet:grid-cols-4 mobile:grid-cols-2  gap-2 w-[830px] min-h-[111px] ">
+          {comics.length == 0 && (
+            <Loader size="md" className="justify-self-center" />
+          )}
           {comics.length > 0 ? (
             comics.map(({ comicCover, title, _id, type }) => (
               <ComicCard
@@ -54,7 +58,7 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
         </div>
       </div>
       <FilterForm
-        className="col-start-2 col-end-3 row-start-1 row-end-3 "
+        className="col-start-2 col-end-3 row-start-1 row-end-3  "
         setComics={updateCatalog}
       />
     </div>

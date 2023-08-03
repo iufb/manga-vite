@@ -13,3 +13,10 @@ export type createChapterType = {
   name?: string;
   pages: string[];
 };
+export type updateChapterType = Omit<chapterType, "pages"> & {
+  comic: {
+    comicCover: string;
+    title: string;
+    alternativeTitle: string;
+  };
+};

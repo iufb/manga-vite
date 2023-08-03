@@ -5,6 +5,7 @@ import {
   CatalogPage,
   ComicPage,
   EditProfilePage,
+  HomePage,
   LoginPage,
   ReaderPage,
   RegisterPage,
@@ -22,7 +23,8 @@ function App() {
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="/" element={<BaseLayout />}>
-            <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="catalog" element={<CatalogPage />} />
             <Route path="add" element={<AddComicPage />} />
             <Route path="user" element={<UserPage />} />
             <Route path="user/edit" element={<EditProfilePage />} />

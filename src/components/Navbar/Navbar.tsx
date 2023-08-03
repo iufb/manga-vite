@@ -18,7 +18,7 @@ export const Navbar = () => {
         }}
       />
       <nav className="w-full  grid-cols-navbar mobile:hidden tablet:grid  ">
-        <Link to={"/"} className="font-bold text-2xl cursor-pointer center ">
+        <Link to={"home"} className="font-bold text-2xl cursor-pointer center ">
           Manga
         </Link>
         <Navlinks />

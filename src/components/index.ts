@@ -10,7 +10,9 @@ import { Comic } from "./Comic/Comic";
 import { ReaderHeader } from "./ReaderHeader/ReaderHeader";
 import { Catalog } from "./Catalog/Catalog";
 import { Footer } from "./Footer/Footer";
+import { Updates } from "./Updates/Updates";
 export {
+  Updates,
   AuthForm,
   PageContainer,
   Navbar,

@@ -49,7 +49,7 @@ export const FilterForm = ({
 
   return (
     <motion.form
-      className={`${className}  relative w-[314px]  col gap-4 bg-customWhite  max-h-[780px]  p-2 rounded-md `}
+      className={`${className}  relative  w-[314px]  col gap-4 bg-customWhite  max-h-[780px]  p-2 rounded-md `}
       onSubmit={handleSubmit(onSubmit)}
       initial={filterFormAnimation.initial}
       animate={
