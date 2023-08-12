@@ -4,14 +4,15 @@ import { useParams } from "react-router-dom";
 import { IComic } from "../../types/comic.type";
 import { ComicProps } from "./Comic.props";
 import { ComicContent } from "./ComicContent/ComicContent";
+import { Loader } from "../Loader/Loader";
 
 export const Comic = ({ className, ...props }: ComicProps) => {
   const { comicId } = useParams();
-  console.log(comicId, "comnicId");
   const { data: comic, isLoading } = useSWR<IComic>(
     `comic/${comicId}`,
     fetcher
   );
+  console.log(comic);
   return (
     <div className={`${className}  grid `} {...props}>
       <div
@@ -25,8 +26,8 @@ export const Comic = ({ className, ...props }: ComicProps) => {
           backgroundSize: "cover",
         }}
       />
-      <div className="mx-auto max-w-[1200px] desktop:-mt-20 mobile:-mt-52   w-full h-full gap-10  ">
-        {isLoading && <div>loading</div>}
+      <div className="mx-auto max-w-[1200px] desktop:-mt-20 mobile:-mt-80   w-full h-full gap-10  ">
+        {isLoading && <Loader size="lg" />}
         {comic && <ComicContent comic={comic} />}
       </div>
     </div>

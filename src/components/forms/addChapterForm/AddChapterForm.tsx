@@ -27,7 +27,6 @@ export const AddChapterForm = ({
       pages,
     })
       .then(() => {
-        console.log({ ...data, comicId, pages });
         navigate(`/comic/${comicId}`);
       })
       .catch((e) => {

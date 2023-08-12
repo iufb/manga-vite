@@ -22,7 +22,6 @@ export const ComicTabContent = ({
     fetcher
   );
 
-  console.log(chapters);
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
   const isLargeText = description.length > 350;
   const changeTab = (tab: string) => {
@@ -57,8 +56,8 @@ export const ComicTabContent = ({
           </div>
         </div>
       )}
-      {chapters && chapters.length == 0 ? (
-        <div>Chapters not found.</div>
+      {chapters?.length == 0 ? (
+        <div className="text-black">Chapters not found.</div>
       ) : (
         activeTab == "Chapters" &&
         chapters && (

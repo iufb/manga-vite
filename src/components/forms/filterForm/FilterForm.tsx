@@ -13,13 +13,18 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { filterComics } from "../../../api/comic/comic";
 import { FilterFormItem } from "./FilterFormItem/FilterFormItem";
 import { AxiosError } from "axios";
+import { useAppDispatch } from "../../../redux/hooks";
+import { updateComics } from "../../../redux/features/comic/comicSlice";
+import { useWindowSize } from "../../../hooks/useWindowSize";
+import { updateModalStatus } from "../../../redux/features/modal/modalSlice";
 
 export const FilterForm = ({
   className,
-  setComics,
   ...props
 }: FilterFormProps): JSX.Element => {
   const [secondLayer, setSecondLayer] = useState(false);
+  const dispatch = useAppDispatch();
+  const { width } = useWindowSize();
   const { register, handleSubmit, reset, getValues } = useForm<filterFormType>({
     defaultValues: {
       genres: [],
@@ -34,12 +39,14 @@ export const FilterForm = ({
   };
   const onSubmit: SubmitHandler<filterFormType> = async (data) => {
     try {
-      console.log(data);
       const { data: comics } = await filterComics(data);
-      setComics(comics);
+      dispatch(updateComics(comics));
+      dispatch(
+        updateModalStatus({ modal: "filterModalState", status: "close" })
+      );
     } catch (e) {
       if (e instanceof AxiosError) {
-        setComics([]);
+        dispatch(updateComics([]));
       }
     }
   };
@@ -49,13 +56,15 @@ export const FilterForm = ({
 
   return (
     <motion.form
-      className={`${className}  relative  w-[314px]  col gap-4 bg-customWhite  max-h-[780px]  p-2 rounded-md `}
+      className={`${className}  relative    col gap-4 bg-customWhite  p-2 rounded-md `}
       onSubmit={handleSubmit(onSubmit)}
-      initial={filterFormAnimation.initial}
+      initial={filterFormAnimation(width).initial}
       animate={
-        secondLayer ? filterFormAnimation.animate : filterFormAnimation.initial
+        secondLayer
+          ? filterFormAnimation(width).animate
+          : filterFormAnimation(width).initial
       }
-      exit={filterFormAnimation.exit}
+      exit={filterFormAnimation(width).exit}
       {...props}
     >
       <button
@@ -104,7 +113,7 @@ export const FilterForm = ({
           <motion.div
             key="secondLayer"
             className="absolute top-9 left-2 bg-gray-200 h-[720px] pl-1 overflow-y-scroll"
-            {...secondLayerAnimation}
+            {...secondLayerAnimation(width)}
           >
             {genres.map((genre) => (
               <Checkbox key={genre} label={genre} {...register("genres")} />
@@ -112,7 +121,11 @@ export const FilterForm = ({
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="flex gap-1 flex-1 w-full center">
+      <div
+        className={`flex gap-1 flex-1 w-full justify-self-end  ${
+          width < 640 && "items-end"
+        }`}
+      >
         <button
           className="btn btn-sm flex-1 bg-indigoGrey text-customWhite hover:bg-indigoLight "
           type="button"
@@ -120,7 +133,7 @@ export const FilterForm = ({
         >
           Clear
         </button>
-        <button className="btn btn-sm flex-1 bg-indigoGrey text-customWhite hover:bg-indigoLight ">
+        <button className="btn btn-sm  flex-1 bg-indigoGrey text-customWhite hover:bg-indigoLight ">
           Submit
         </button>
       </div>

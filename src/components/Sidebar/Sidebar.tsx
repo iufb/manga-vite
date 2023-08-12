@@ -15,7 +15,7 @@ const sidebarlinks = [
   {
     icon: <AiOutlineHome />,
     name: "Home",
-    path: "/",
+    path: "/home",
   },
   {
     icon: <AiOutlineBook />,

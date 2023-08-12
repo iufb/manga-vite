@@ -13,8 +13,11 @@ import {
 } from "./pages";
 import { BaseLayout, ReaderLayout } from "./layouts";
 import { Alert } from "./components/Alert/Alert";
+import { useWindowSize } from "./hooks/useWindowSize";
+import { MobileLayout } from "./layouts/MobileLayout/MobileLayout";
 
 function App() {
+  const { width } = useWindowSize();
   return (
     <>
       <Alert />
@@ -22,7 +25,10 @@ function App() {
         <Routes>
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route path="/" element={<BaseLayout />}>
+          <Route
+            path="/"
+            element={width > 640 ? <BaseLayout /> : <MobileLayout />}
+          >
             <Route path="home" element={<HomePage />} />
             <Route path="catalog" element={<CatalogPage />} />
             <Route path="add" element={<AddComicPage />} />

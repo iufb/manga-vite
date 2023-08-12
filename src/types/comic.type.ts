@@ -5,6 +5,7 @@ export interface IComic {
   title: string;
   alternativeTitle: string;
   description: string;
+  chaptersCount: number;
   type: comicType;
   genres: string[];
   status: comicStatusType;

@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 import { findByTitle, getAllComics } from "../../api/comic/comic";
 import { FilterForm } from "../forms/filterForm/FilterForm";
 import { Loader } from "../Loader/Loader";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { updateComics } from "../../redux/features/comic/comicSlice";
+import { updateModalStatus } from "../../redux/features/modal/modalSlice";
 
 export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
   const [search, setSearch] = useState<string>("");
-  const [comics, setComics] = useState<IComic[]>([]);
+  const { comics } = useAppSelector((state) => state.comic);
+  const dispatch = useAppDispatch();
   const updateCatalog = (comics: IComic[]) => {
-    setComics(comics);
+    dispatch(updateComics(comics));
   };
   const handleEnter = (e: React.KeyboardEvent) => {
     if (e.code == "Enter") {
@@ -24,7 +28,7 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
   }, []);
   return (
     <div
-      className={`${className} grid grid-cols-catalog gap-5 relative  justify-center items-start my-5  w-full h-full  `}
+      className={`${className}  flex desktop:flex-row tablet:flex-row mobile:flex-col mobile:items-center tablet:items-start  gap-5 relative  justify-center items-start my-5  w-full h-full  `}
       {...props}
     >
       <div className={`bg-customWhite py-3 px-4 rounded-md`}>
@@ -36,7 +40,7 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleEnter}
         />
-        <div className="grid desktop:grid-cols-5 tablet:grid-cols-4 mobile:grid-cols-2  gap-2 w-[830px] min-h-[111px] ">
+        <div className="grid desktop:grid-cols-5 laptop:grid-cols-3 tablet:grid-cols-2  mobile:grid-cols-2 tablet:mx-auto desktop:mx-0  gap-2 max-w-[830px] w-full min-h-[111px] ">
           {comics.length == 0 && (
             <Loader size="md" className="justify-self-center" />
           )}
@@ -57,10 +61,22 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
           )}
         </div>
       </div>
-      <FilterForm
-        className="col-start-2 col-end-3 row-start-1 row-end-3  "
-        setComics={updateCatalog}
-      />
+      <FilterForm className="mobile:hidden tablet:flex" />
+      <div className="mobile:flex tablet:hidden fixed bottom-0 bg-customWhite z-50 w-full center py-2 px-1 ">
+        <button className="btn btn-sm bg-gray-300 text-gray-500 flex-1">
+          Sort
+        </button>
+        <button
+          className="btn btn-sm bg-gray-300 text-gray-500  flex-1 "
+          onClick={() =>
+            dispatch(
+              updateModalStatus({ modal: "filterModalState", status: "open" })
+            )
+          }
+        >
+          Filters
+        </button>
+      </div>
     </div>
   );
 };

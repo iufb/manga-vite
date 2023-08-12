@@ -18,6 +18,7 @@ import { Select } from "../../Select/Select";
 import { createComic } from "../../../api/comic/comic";
 import { useNavigate } from "react-router-dom";
 import { Textarea } from "../../inputs/Textarea/Textarea";
+import { createList } from "../../../api/list/list";
 
 export const AddComicForm = ({
   className,
@@ -49,6 +50,7 @@ export const AddComicForm = ({
           comicBg: uploadedImage.data.comicBg,
         });
         navigate(`/comic/${comic.data._id}`);
+        await createList(comic.data._id);
       }
     } catch (e) {
       if (e instanceof AxiosError) {

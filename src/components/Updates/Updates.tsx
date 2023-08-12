@@ -2,7 +2,7 @@ import fetcher from "../../api/axios-client";
 import { updateChapterType } from "../../types/chapter.type";
 import { UpdatesProps } from "./Updates.props";
 import useSWR from "swr";
-import { UpdatesItem } from "./UpdatesItem/UpdatesItems";
+import { UpdatesItem } from "./UpdatesItem/UpdatesItem";
 
 export const Updates = ({ className, ...props }: UpdatesProps): JSX.Element => {
   const { data: chapters, isLoading } = useSWR<updateChapterType[]>(
@@ -20,7 +20,9 @@ export const Updates = ({ className, ...props }: UpdatesProps): JSX.Element => {
       <div className="col gap-2 mt-5">
         {isLoading && <div>Loading</div>}
         {chapters &&
-          chapters.map((chapter) => <UpdatesItem chapter={chapter} />)}
+          chapters.map((chapter) => (
+            <UpdatesItem chapter={chapter} key={chapter._id} />
+          ))}
       </div>
     </div>
   );

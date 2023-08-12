@@ -15,7 +15,6 @@ export const ProgressBar = ({
     }
   }, [updatedWidth]);
   function updateWidth(value: number) {
-    console.log(value);
     if (elRef.current) elRef.current.style.width = `${value}%`;
   }
   return (

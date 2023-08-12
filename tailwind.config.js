@@ -22,7 +22,7 @@ export default {
       },
       gridTemplateRows: {
         navbar: "100px",
-        comicDesktop: "40px auto 60px 1fr",
+        comicDesktop: "40px auto 80px 1fr",
         layout: "auto 1fr auto",
         catalog: "300px 1fr",
       },

@@ -1,5 +1,6 @@
 import { comicFormType } from "../types/comic.type";
 
+export const listArray = ["reading", "planned", "dropped", "finished"];
 export const comicTypes = ["Manga", "Manhwa", "Manhua"];
 export const comicStatus = ["Ongoing", "Finished", "Dropped"];
 export const genres = [

@@ -1,32 +1,40 @@
 export const transition = { type: "spring", duration: 0.8 };
-export const secondLayerAnimation = {
-  initial: {
-    width: 0,
-    height: 0,
-    opacity: 0,
-  },
-  animate: {
-    width: 298,
-    height: 720,
-    opacity: 1,
-  },
-  exit: {
-    width: 0,
-    height: 0,
-    opacity: 0,
-  },
+export const secondLayerAnimation = (width: number) => {
+  const isMobile = width < 640;
+  return {
+    initial: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+    },
+    animate: {
+      width: isMobile ? 500 : 298,
+      height: isMobile ? "95%" : 720,
+      opacity: 1,
+    },
+    exit: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+    },
+  };
 };
-export const filterFormAnimation = {
-  initial: {
-    height: 440,
-  },
-  animate: {
-    height: 780,
-  },
-  exit: {
-    height: 440,
-  },
+export const filterFormAnimation = (windowWidth: number) => {
+  const isMobile = windowWidth < 640;
+  return {
+    initial: {
+      width: isMobile ? "auto" : 314,
+      height: isMobile ? "95%" : 420,
+    },
+    animate: {
+      height: 780,
+    },
+    exit: {
+      height: 420,
+    },
+  };
 };
+
 export const slideAnimation = (direction: string) => {
   return {
     initial: {

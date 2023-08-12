@@ -14,7 +14,7 @@ export const UpdatesItem = ({
           src={chapter.comic.comicCover}
           width={100}
           height={140}
-          className="h-full"
+          className="h-[140px]"
         />
       </Link>
       <div className="flex-1">

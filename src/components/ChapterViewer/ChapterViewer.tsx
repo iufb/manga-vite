@@ -27,7 +27,6 @@ export const ChapterViewer = ({
   const { loading, setLoading } = useImageLoading(imageUrl);
   useEffect(() => {
     data && dispatch(setPagesQuantity(data?.pagesQuantity));
-    console.log(data?.pagesQuantity);
   }, [data]);
   const goForward = () => {
     setLoading(true);
@@ -61,8 +60,6 @@ export const ChapterViewer = ({
     }
     navigate(`?page=${currentPage - 1}`);
   };
-  const { globalModal } = useAppSelector((state) => state.modal);
-  console.log(globalModal);
 
   return (
     <div className={`${className} relative`} {...props}>

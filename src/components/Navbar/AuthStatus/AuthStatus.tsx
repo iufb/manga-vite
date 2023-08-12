@@ -6,6 +6,7 @@ import { UserIcon } from "../../UserIcon/UserIcon";
 import { UserMenuModal } from "../..";
 import { useEffect, useState } from "react";
 import { mutate } from "swr";
+import { AnimatePresence } from "framer-motion";
 const LoginOrRegister = () => (
   <div className="flex gap-2 text-md center ">
     <Link
@@ -56,7 +57,9 @@ export const AuthStatus = () => {
       ) : (
         <LoginOrRegister />
       )}
-      {authModalState == "open" && <UserMenuModal logout={logout} />}
+      <AnimatePresence>
+        {authModalState == "open" && <UserMenuModal logout={logout} />}
+      </AnimatePresence>
     </div>
   );
 };

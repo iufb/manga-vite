@@ -4,13 +4,17 @@ export type modalType =
   | "authModalState"
   | "sidebarModalState"
   | "chapterListModalState"
-  | "previewModalState";
+  | "previewModalState"
+  | "filterModalState"
+  | "addToListModal";
 export interface ModalState {
   globalModal: statusType;
   authModalState: statusType;
   previewModalState: statusType;
   sidebarModalState: statusType;
   chapterListModalState: statusType;
+  filterModalState: statusType;
+  addToListModal: statusType;
 }
 
 const initialState: ModalState = {
@@ -19,6 +23,8 @@ const initialState: ModalState = {
   authModalState: "close",
   sidebarModalState: "close",
   chapterListModalState: "close",
+  filterModalState: "close",
+  addToListModal: "close",
 };
 
 export const modalSlice = createSlice({
