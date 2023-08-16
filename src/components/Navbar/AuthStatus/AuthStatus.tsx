@@ -52,6 +52,7 @@ export const AuthStatus = () => {
                 updateModalStatus({ status: "open", modal: "authModalState" })
               )
             }
+            className="max-h-[50px]"
           />
         </div>
       ) : (

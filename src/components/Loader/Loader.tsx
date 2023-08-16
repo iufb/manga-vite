@@ -5,13 +5,21 @@ export const Loader = ({
   size,
   ...props
 }: LoaderProps): JSX.Element => {
+  const getSize = () => {
+    switch (size) {
+      case "lg":
+        return "w-24 h-24";
+      case "md":
+        return "w-14 h-14";
+      case "sm":
+        return "w-5 h-5";
+    }
+  };
   return (
     <div role="status" className={`${className} center`} {...props}>
       <svg
         aria-hidden="true"
-        className={`${
-          size == "lg" ? "w-24 h-24" : "w-14 h-14"
-        } mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600`}
+        className={`${getSize()} mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

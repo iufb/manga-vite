@@ -15,7 +15,7 @@ export const SlidePanel = ({
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => {
-    dispatch(updateModalStatus({ modal, status: "close" }));
+    if (modal) dispatch(updateModalStatus({ modal, status: "close" }));
   });
   return (
     <motion.div

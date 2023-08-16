@@ -5,6 +5,7 @@ import { ModalContainer } from "../../modals/ModalContainer/ModalContainer";
 import { bytesToMB } from "../../../utils/helpers";
 import { ProgressBar } from "../../ProgressBar/ProgressBar";
 import { upload } from "../../../api/upload/upload";
+import { Loader } from "../../Loader/Loader";
 
 export const FileInput = ({
   setFiles,
@@ -14,6 +15,7 @@ export const FileInput = ({
 }: FileInputProps): JSX.Element => {
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
   const { comicId } = useParams();
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) setFile(e.target?.files[0]);
@@ -22,6 +24,7 @@ export const FileInput = ({
   };
   const uploadZip = async () => {
     setProgress(0);
+    setLoading(true);
     upload({
       type: "chapter",
       file,
@@ -39,6 +42,7 @@ export const FileInput = ({
     })?.then(({ data }: { data: string[] }) => {
       setFiles(data);
       setFile(null);
+      setLoading(false);
     });
   };
   return (
@@ -64,8 +68,10 @@ export const FileInput = ({
                 <span className="flex-1 truncate">{file.name}</span>
                 <span>{bytesToMB(file.size)} MB</span>
               </div>
-
-              <ProgressBar percentage={progress} />
+              <div className="flex gap-2 center">
+                <ProgressBar percentage={progress} />
+                {loading && <Loader size="sm" />}
+              </div>
             </div>
             <div className="flex gap-2 ">
               <button className="btn btn-sm" onClick={uploadZip}>

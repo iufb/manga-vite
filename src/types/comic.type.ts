@@ -14,7 +14,14 @@ export interface IComic {
   artist: string;
   publishingCompany: string;
 }
-
+export interface IListComic {
+  comic: string;
+  comicData: {
+    alternativeTitle: string;
+    comicCover: string;
+    title: string;
+  };
+}
 export type comicType = "manga" | "manhwa" | "manhua";
 export type comicStatusType = "ongoing" | "finished" | "dropped";
 export type comicFormType =

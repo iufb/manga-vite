@@ -9,6 +9,7 @@ import { ChapterViewer } from "./ChapterViewer/ChapterViewer";
 import { Comic } from "./Comic/Comic";
 import { ReaderHeader } from "./ReaderHeader/ReaderHeader";
 import { Catalog } from "./Catalog/Catalog";
+import { UserComicsShelf } from "./UserComicsShelf/UserComicsShelf";
 import { Footer } from "./Footer/Footer";
 import { Updates } from "./Updates/Updates";
 export {
@@ -20,6 +21,7 @@ export {
   UserMenuModal,
   EditProfileForm,
   AddComicForm,
+  UserComicsShelf,
   ReaderHeader,
   AddChapterForm,
   ChapterViewer,

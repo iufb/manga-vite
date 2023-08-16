@@ -15,7 +15,7 @@ export const ComicCard = ({
         src={cover}
         width={147}
         height={206}
-        className="rounded-md  h-full"
+        className="rounded-md   h-[206px]"
       />
       <div className="absolute z-20 bottom-0 left-0 pl-1 col  overflow-hidden text-customWhite font-bold w-[147px]   cardTitle  rounded-b-md ">
         <span>{type}</span>

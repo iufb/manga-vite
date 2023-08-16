@@ -17,6 +17,7 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { updateComics } from "../../../redux/features/comic/comicSlice";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 import { updateModalStatus } from "../../../redux/features/modal/modalSlice";
+import { useSearchParams } from "react-router-dom";
 
 export const FilterForm = ({
   className,
@@ -25,12 +26,17 @@ export const FilterForm = ({
   const [secondLayer, setSecondLayer] = useState(false);
   const dispatch = useAppDispatch();
   const { width } = useWindowSize();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { register, handleSubmit, reset, getValues } = useForm<filterFormType>({
     defaultValues: {
-      genres: [],
-      status: [],
-      type: [],
-      translateStatus: [],
+      genres: searchParams.getAll("genres")
+        ? searchParams.getAll("genres")
+        : [],
+      status: searchParams.getAll("status")
+        ? searchParams.getAll("status")
+        : [],
+      type: searchParams.getAll("type"),
+      translateStatus: searchParams.getAll("translateStatus"),
     },
   });
   const genresDisplay = getValues().genres ?? [];
@@ -40,6 +46,7 @@ export const FilterForm = ({
   const onSubmit: SubmitHandler<filterFormType> = async (data) => {
     try {
       const { data: comics } = await filterComics(data);
+      setSearchParams(data);
       dispatch(updateComics(comics));
       dispatch(
         updateModalStatus({ modal: "filterModalState", status: "close" })
@@ -56,15 +63,13 @@ export const FilterForm = ({
 
   return (
     <motion.form
-      className={`${className}  relative    col gap-4 bg-customWhite  p-2 rounded-md `}
+      className={`${className}  relative tablet:max-w-[314px]  w-full   col gap-4 bg-customWhite  p-2 rounded-md desktop:[--filter-form-width:314px] mobile:[--filter-form-width:100%]  tablet:[--height-from:420px]  tablet:[--height-to:780px]  mobile:[--height-from:95%] mobile:[--height-to:95%] `}
       onSubmit={handleSubmit(onSubmit)}
-      initial={filterFormAnimation(width).initial}
+      initial={filterFormAnimation.initial}
       animate={
-        secondLayer
-          ? filterFormAnimation(width).animate
-          : filterFormAnimation(width).initial
+        secondLayer ? filterFormAnimation.animate : filterFormAnimation.initial
       }
-      exit={filterFormAnimation(width).exit}
+      exit={filterFormAnimation.exit}
       {...props}
     >
       <button
@@ -112,8 +117,8 @@ export const FilterForm = ({
         {secondLayer && (
           <motion.div
             key="secondLayer"
-            className="absolute top-9 left-2 bg-gray-200 h-[720px] pl-1 overflow-y-scroll"
-            {...secondLayerAnimation(width)}
+            className="absolute top-9 left-2 bg-gray-200 h-[720px] pl-1 overflow-y-scroll [--width-from:0px]  [--heigth-from:0px] mobile:[--width-to:500px] tablet:[--width-to:298px] mobile:[--height-to:656px] tablet:[--height-to:720px]"
+            {...secondLayerAnimation}
           >
             {genres.map((genre) => (
               <Checkbox key={genre} label={genre} {...register("genres")} />

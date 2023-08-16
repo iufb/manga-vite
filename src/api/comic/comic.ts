@@ -1,5 +1,6 @@
-import { IComic } from "../../types/comic.type";
+import { IComic, IListComic } from "../../types/comic.type";
 import { filterFormType } from "../../types/forms/filterForm.type";
+import { listType } from "../../types/list.type";
 import { instance } from "../axios-client";
 
 export const createComic = async (data: IComic) => {
@@ -23,4 +24,12 @@ export const findByTitle = async (title: string) => {
 };
 export const filterComics = async (filter: filterFormType) => {
   return instance().post<IComic[]>("comic/filter", filter);
+};
+export const getComicsByList = async (userId: string, listType?: listType) => {
+  return instance().get<IListComic[]>("list/listType", {
+    params: {
+      userId,
+      listType,
+    },
+  });
 };

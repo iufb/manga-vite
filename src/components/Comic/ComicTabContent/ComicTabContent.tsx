@@ -33,7 +33,12 @@ export const ComicTabContent = ({
       className={`${className} w-full rounded-md bg-white flex flex-col gap-4 p-4 h-fit mt-4`}
       {...props}
     >
-      <Tabs tabs={tabs} changeTab={changeTab} activeTab={activeTab} />
+      <Tabs
+        tabs={tabs}
+        changeTab={changeTab}
+        activeTab={activeTab}
+        tabStyle="lifted"
+      />
       {activeTab == "Information" && (
         <div className="flex flex-col gap-4">
           <p>
@@ -56,11 +61,9 @@ export const ComicTabContent = ({
           </div>
         </div>
       )}
-      {chapters?.length == 0 ? (
-        <div className="text-black">Chapters not found.</div>
-      ) : (
-        activeTab == "Chapters" &&
-        chapters && (
+
+      {activeTab == "Chapters" &&
+        (chapters && chapters?.length > 0 ? (
           <div className="flex flex-col gap-2 px-3 cursor-pointer">
             {chapters.map((chapter) => (
               <div
@@ -86,8 +89,9 @@ export const ComicTabContent = ({
               </div>
             ))}
           </div>
-        )
-      )}
+        ) : (
+          <div className="text-gray-400 center ">Chapters not found.</div>
+        ))}
     </div>
   );
 };

@@ -15,7 +15,7 @@ export const BaseModal = ({
     <div className={`${className} `} {...props}>
       <h2 className="text-lg mb-2 text-gray-800">{title} :</h2>
       <AiOutlineClose
-        className="absolute right-1 top-1 text-xl z-40"
+        className="absolute right-2 top-2 text-xl z-40"
         onClick={() =>
           dispatch(updateModalStatus({ modal: modalType, status: "close" }))
         }

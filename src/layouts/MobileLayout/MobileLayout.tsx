@@ -14,7 +14,7 @@ export const MobileLayout = () => {
 
   return (
     <>
-      <div className="layout h-screen">
+      <div className="layout h-screen  bg-lightGrey">
         <Navbar />
         <main>
           <Outlet />

@@ -1,5 +1,8 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 export interface ProgressBarProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  extends DetailedHTMLProps<
+    HTMLAttributes<HTMLProgressElement>,
+    HTMLProgressElement
+  > {
   percentage: number;
 }

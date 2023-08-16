@@ -42,7 +42,7 @@ export const Dropdown = ({
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setShow(false));
   return (
-    <div className={` ${className} w-full  `} {...props} ref={ref}>
+    <div className={` ${className} w-full dropdown  `} {...props} ref={ref}>
       <label
         tabIndex={0}
         onClick={() => setShow((prev) => !prev)}
@@ -58,7 +58,7 @@ export const Dropdown = ({
           initial={show ? "visible" : "hidden"}
           animate={show ? "visible" : "hidden"}
           tabIndex={0}
-          className={`  bg-gray-200 z-[1]  menu-md  mt-2 shadow  rounded-box w-full`}
+          className={` dropdown-content  bg-gray-200 z-[1]  menu-md  mt-2 shadow  rounded-box w-full`}
         >
           {values.map((value) => (
             <motion.li

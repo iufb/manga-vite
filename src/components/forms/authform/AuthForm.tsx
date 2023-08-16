@@ -24,7 +24,7 @@ export const AuthForm = ({
         localStorage.setItem("token", response.data.access_token);
       }
       setError("");
-      navigate("/");
+      navigate("/home");
       mutate("user");
     } catch (e) {
       if (e instanceof AxiosError) {

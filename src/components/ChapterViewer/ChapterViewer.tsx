@@ -70,7 +70,7 @@ export const ChapterViewer = ({
             onClick={goBack}
           />
           {loading ? (
-            <div className="text-customWhite bg-gray-900 text-4xl w-[700px] h-screen center">
+            <div className="text-customWhite bg-gray-900 text-4xl mobile:w-[390px] tablet:w-[768px] desktop:w-[700px] h-screen center">
               <img src="/loader.gif" />
             </div>
           ) : (

@@ -36,7 +36,15 @@ export const Sidebar = ({ className, ...props }: SidebarProps): JSX.Element => {
       className={`${className} w-full h-full col relative gap-2 text-[16px] font-bold text-customWhite py-8 items-center bg-gray-800 [&>*:last-child]:border-b [&>*:last-child]:border-customWhite [&>*:last-child]:border-opacity-50 `}
       {...props}
     >
-      <Link className="col center" to={"/user"}>
+      <Link
+        className="col center"
+        to={"/user"}
+        onClick={() =>
+          dispatch(
+            updateModalStatus({ modal: "sidebarModalState", status: "close" })
+          )
+        }
+      >
         <UserIcon avatar={user?.avatar} width={100} height={100} />
         <span className=" text-lg ">{user?.name}</span>
       </Link>
