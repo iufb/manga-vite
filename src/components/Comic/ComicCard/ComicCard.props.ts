@@ -1,7 +1,11 @@
-import { LinkProps } from "react-router-dom";
 import { comicType } from "../../../types/comic.type";
-export interface ComicCardProps extends LinkProps {
+import { HTMLMotionProps } from "framer-motion";
+export interface ComicCardProps extends HTMLMotionProps<"div"> {
   cover: string;
+  id: string;
   name: string;
   type?: comicType;
+  lastChapter?: number;
+  createdAt?: string;
+  comicLayout: "list" | "tile";
 }

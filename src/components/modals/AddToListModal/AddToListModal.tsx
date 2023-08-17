@@ -24,7 +24,6 @@ export const AddToListModal = ({
           user: user._id,
           comic: comicId,
           listType: value,
-          lastChapter: 1,
         }).then(() => {
           dispatch(
             updateModalStatus({ modal: "addToListModal", status: "close" })

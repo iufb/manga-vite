@@ -16,6 +16,8 @@ export interface IComic {
 }
 export interface IListComic {
   comic: string;
+  lastChapter: number;
+  updatedAt: string;
   comicData: {
     alternativeTitle: string;
     comicCover: string;

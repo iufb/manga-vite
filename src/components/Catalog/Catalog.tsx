@@ -31,7 +31,7 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
   }, []);
   return (
     <div
-      className={`${className}  flex desktop:flex-row pb-10 tablet:flex-row mobile:flex-col mobile:items-center tablet:items-start  gap-5 relative  justify-center items-start my-5  w-full h-full  `}
+      className={`${className}  flex desktop:flex-row pb-10 tablet:px-10  tablet:flex-row mobile:flex-col mobile:items-center tablet:items-start  gap-5 relative  justify-center items-start my-5  w-full h-full  `}
       {...props}
     >
       <div className={`bg-customWhite py-3 px-4 rounded-md`}>
@@ -43,18 +43,19 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleEnter}
         />
-        <ComicsGrid>
+        <ComicsGrid className="max-w-[820px] ">
           {comics.length == 0 && (
             <Loader size="md" className="justify-self-center" />
           )}
           {comics.length > 0 ? (
             comics.map(({ comicCover, title, _id, type }) => (
               <ComicCard
+                id={_id}
+                comicLayout="tile"
                 type={type}
                 cover={comicCover}
                 name={title}
                 key={title}
-                to={`/comic/${_id}`}
               />
             ))
           ) : (

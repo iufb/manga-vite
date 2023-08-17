@@ -48,7 +48,6 @@ export const ComicButton = ({
         user: user._id,
         comic: comic._id,
         listType: value,
-        lastChapter: 1,
       });
     }
   };

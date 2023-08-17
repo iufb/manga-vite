@@ -3,18 +3,20 @@ import { useAuth } from "../../hooks";
 import { IListComic } from "../../types/comic.type";
 import { listType } from "../../types/list.type";
 import { listArray } from "../../utils/constants";
-import { Loader } from "../Loader/Loader";
 import { Tabs } from "../Tabs/Tabs";
 import { UserComicsShelfProps } from "./UserComicsShelf.props";
 import { getComicsByList } from "../../api/comic/comic";
 import { ComicCard } from "../Comic/ComicCard/ComicCard";
 import { ComicsGrid } from "../ComicsGrid/ComicsGrid";
+import { AiOutlineUnorderedList } from "react-icons/ai";
+import { PiExcludeSquareFill } from "react-icons/pi";
 
 export const UserComicsShelf = ({
   className,
   ...props
 }: UserComicsShelfProps): JSX.Element => {
   const { user } = useAuth();
+  const [layout, setLayout] = useState<"tile" | "list">("list");
   const [activeTab, setActiveTab] = useState<listType>(() => listArray[0]);
   const [comics, setComics] = useState<IListComic[]>([]);
   useEffect(() => {
@@ -41,14 +43,27 @@ export const UserComicsShelf = ({
         activeTab={activeTab}
         tabStyle="boxed"
       />
+      <div className="text-2xl bg-customWhite w-fit p-2 rounded-md flex gap-2 center cursor-pointer">
+        <AiOutlineUnorderedList
+          onClick={() => setLayout("list")}
+          className={`${layout == "list" && "bg-gray-300 "} p-1 rounded-md`}
+        />
+        <PiExcludeSquareFill
+          onClick={() => setLayout("tile")}
+          className={`${layout == "tile" && "bg-gray-300"} p-1 rounded-md`}
+        />
+      </div>
       <ComicsGrid>
         {comics && comics.length > 0 ? (
-          comics.map(({ comic, comicData }) => (
+          comics.map(({ comic, comicData, lastChapter, updatedAt }) => (
             <ComicCard
+              id={comic}
+              comicLayout={layout}
+              lastChapter={lastChapter}
+              createdAt={updatedAt}
               key={comic}
               cover={comicData.comicCover}
               name={comicData.title}
-              to={`/comic/${comic}`}
             />
           ))
         ) : (
