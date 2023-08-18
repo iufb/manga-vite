@@ -17,7 +17,10 @@ export const ComicButton = ({
   ...props
 }: ComicButtonProps): JSX.Element => {
   const { user } = useAuth();
-  const { data } = useSWR(`list/${comic._id}/${user?._id}`, fetcher);
+  const { data } = useSWR<{ listType: listType; lastChapter: number }>(
+    `list/${comic._id}/${user?._id}`,
+    fetcher
+  );
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [list, setList] = useState<listType>("add to list");
@@ -54,21 +57,25 @@ export const ComicButton = ({
 
   useEffect(() => {
     if (data) {
-      setList(data);
-      changeColor(data);
+      setList(data.listType);
+      changeColor(data.listType);
     }
-  }, [data]);
+  }, [data?.listType]);
   return (
     <div
-      className={`${className} z-20 desktop:max-w-[250px]  desktop:col  mobile:flex  gap-2 mobile:w-full desktop:static desktop:p-0 desktop:bg-inherit  mobile:fixed mobile:bottom-0 mobile:bg-customWhite mobile:px-2 mobile:py-3 `}
+      className={`${className} z-20 desktop:max-w-[250px]  desktop:col  mobile:flex  gap-1 mobile:w-full desktop:static desktop:p-0 desktop:bg-inherit  mobile:fixed mobile:bottom-0 mobile:bg-customWhite mobile:px-2 mobile:py-3 `}
       {...props}
     >
       <button
         disabled={comic.chaptersCount == 0}
-        onClick={() => navigate(`/reader/${comic._id}/1?page=1`)}
+        onClick={() =>
+          navigate(`/reader/${comic._id}/${data?.lastChapter}?page=1`)
+        }
         className="flex-1 center bg-indigoGrey text-customWhite py-1 rounded-md hover:bg-indigoLight disabled:bg-gray-500 disabled:cursor-not-allowed "
       >
-        Start reading
+        {data?.lastChapter == 1 || comic.chaptersCount == 0
+          ? "Start reading"
+          : "Continue"}
       </button>
       <button
         onClick={() =>

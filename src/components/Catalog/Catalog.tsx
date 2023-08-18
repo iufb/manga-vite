@@ -2,7 +2,7 @@ import { CatalogProps } from "./Catalog.props";
 import { IComic } from "../../types/comic.type";
 import { ComicCard } from "../Comic/ComicCard/ComicCard";
 import { useEffect, useState } from "react";
-import { findByTitle, getAllComics } from "../../api/comic/comic";
+import { filterComics, findByTitle, getAllComics } from "../../api/comic/comic";
 import { FilterForm } from "../forms/filterForm/FilterForm";
 import { Loader } from "../Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -10,12 +10,14 @@ import { updateComics } from "../../redux/features/comic/comicSlice";
 import { updateModalStatus } from "../../redux/features/modal/modalSlice";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { ComicsGrid } from "../ComicsGrid/ComicsGrid";
+import { useSearchParams } from "react-router-dom";
 
 export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
   const [search, setSearch] = useState<string>("");
   const { width } = useWindowSize();
   const { comics } = useAppSelector((state) => state.comic);
   const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
   const updateCatalog = (comics: IComic[]) => {
     dispatch(updateComics(comics));
   };
@@ -27,7 +29,12 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
     }
   };
   useEffect(() => {
-    getAllComics().then(({ data }) => updateCatalog(data));
+    const genres = searchParams.getAll("genres");
+    if (genres.length > 0) {
+      filterComics({ genres }).then(({ data }) => updateCatalog(data));
+    } else {
+      getAllComics().then(({ data }) => updateCatalog(data));
+    }
   }, []);
   return (
     <div
@@ -43,7 +50,7 @@ export const Catalog = ({ className, ...props }: CatalogProps): JSX.Element => {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleEnter}
         />
-        <ComicsGrid className="max-w-[820px] ">
+        <ComicsGrid className="desktop:w-[720px] tablet:w-[500px] mobile:w-[350px]  ">
           {comics.length == 0 && (
             <Loader size="md" className="justify-self-center" />
           )}

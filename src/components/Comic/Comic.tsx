@@ -5,14 +5,18 @@ import { IComic } from "../../types/comic.type";
 import { ComicProps } from "./Comic.props";
 import { ComicContent } from "./ComicContent/ComicContent";
 import { Loader } from "../Loader/Loader";
+import { useAppSelector } from "../../redux/hooks";
+import { ModalContainer } from "../modals/ModalContainer/ModalContainer";
+import { RateModal } from "../modals/RateModal/RateModal";
 
 export const Comic = ({ className, ...props }: ComicProps) => {
   const { comicId } = useParams();
+
+  const { addRate } = useAppSelector((state) => state.modal);
   const { data: comic, isLoading } = useSWR<IComic>(
     `comic/${comicId}`,
     fetcher
   );
-  console.log(comic);
   return (
     <div className={`${className}  grid `} {...props}>
       <div
@@ -30,6 +34,11 @@ export const Comic = ({ className, ...props }: ComicProps) => {
         {isLoading && <Loader size="lg" />}
         {comic && <ComicContent comic={comic} />}
       </div>
+      {addRate == "open" && (
+        <ModalContainer>
+          <RateModal />
+        </ModalContainer>
+      )}
     </div>
   );
 };

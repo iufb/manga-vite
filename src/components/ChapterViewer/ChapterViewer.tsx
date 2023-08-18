@@ -1,17 +1,20 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import fetcher from "../../api/axios-client";
 import { ChapterViewerProps } from "./ChapterViewer.props";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { ImagePreview } from "../ImagePreview/ImagePreview";
 import { useEffect } from "react";
 import { useImageLoading } from "../../hooks/useImageLoading";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setPagesQuantity } from "../../redux/features/chapter/chapterSlice";
 import { scrollToTop } from "../../utils/helpers";
+import { updateLastChapter } from "../../api/list/list";
+import { useAuth } from "../../hooks";
 export const ChapterViewer = ({
   className,
   ...props
 }: ChapterViewerProps): JSX.Element => {
+  const { user } = useAuth();
   const { comicId, chapterNumber } = useParams();
   const [searchParams] = useSearchParams();
   const { chaptersQuantity } = useAppSelector((state) => state.chapter);
@@ -34,9 +37,18 @@ export const ChapterViewer = ({
     if (currentPage == data?.pagesQuantity) {
       if (Number(chapterNumber) == chaptersQuantity) {
         navigate(`/comic/${comicId}`);
+        if (user && comicId && chapterNumber) {
+          updateLastChapter(user?._id, comicId, Number(chapterNumber));
+
+          mutate(`list/lastChapter/${user._id}/${comicId}`);
+        }
         return;
       } else {
         navigate(`/reader/${comicId}/${Number(chapterNumber) + 1}?page=1`);
+        if (user && comicId && chapterNumber) {
+          updateLastChapter(user?._id, comicId, Number(chapterNumber));
+          mutate(`list/lastChapter/${user._id}/${comicId}`);
+        }
         return;
       }
     }

@@ -8,6 +8,7 @@ export const ComicCard = ({
   id,
   name,
   comicLayout,
+  chaptersCount,
   createdAt,
   lastChapter,
   type,
@@ -59,12 +60,16 @@ export const ComicCard = ({
             <Link to={`/comic/${id}`} className="text-lg">
               {name}
             </Link>
-            <Link
-              to={`/reader/${id}/${lastChapter}?page=1`}
-              className="text-gray-400"
-            >
-              Continue {lastChapter} chapter
-            </Link>
+            {chaptersCount > 0 ? (
+              <Link
+                to={`/reader/${id}/${lastChapter}?page=1`}
+                className="text-gray-400"
+              >
+                Continue {lastChapter} chapter
+              </Link>
+            ) : (
+              <span className="text-gray-400">No chapters found.</span>
+            )}
           </div>
           <div>
             <h3 className="text-gray-400">Added</h3>

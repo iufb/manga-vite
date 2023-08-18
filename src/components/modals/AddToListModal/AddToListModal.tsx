@@ -16,7 +16,6 @@ export const AddToListModal = ({
   const { user } = useAuth();
   const dispatch = useAppDispatch();
   const { comicId } = useParams();
-  console.log(user?._id, comicId);
   const onSelect = (value: listType) => {
     try {
       if (user && comicId) {

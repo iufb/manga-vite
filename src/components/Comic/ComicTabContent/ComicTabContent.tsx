@@ -19,7 +19,12 @@ export const ComicTabContent = ({
   const navigate = useNavigate();
   const { data: chapters } = useSWR<chapterType[]>(
     `chapter/byComic/${comicId}`,
-    fetcher
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
@@ -56,7 +61,7 @@ export const ComicTabContent = ({
           </p>
           <div className="flex gap-3 flex-wrap ">
             {genres.map((genre) => (
-              <Tag name={genre} key={genre} />
+              <Tag name={genre} key={genre} to={`/catalog?genres=${genre}`} />
             ))}
           </div>
         </div>

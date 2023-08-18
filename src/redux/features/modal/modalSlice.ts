@@ -6,7 +6,8 @@ export type modalType =
   | "chapterListModalState"
   | "previewModalState"
   | "filterModalState"
-  | "addToListModal";
+  | "addToListModal"
+  | "addRate";
 export interface ModalState {
   globalModal: statusType;
   authModalState: statusType;
@@ -15,6 +16,7 @@ export interface ModalState {
   chapterListModalState: statusType;
   filterModalState: statusType;
   addToListModal: statusType;
+  addRate: statusType;
 }
 
 const initialState: ModalState = {
@@ -25,6 +27,7 @@ const initialState: ModalState = {
   chapterListModalState: "close",
   filterModalState: "close",
   addToListModal: "close",
+  addRate: "close",
 };
 
 export const modalSlice = createSlice({

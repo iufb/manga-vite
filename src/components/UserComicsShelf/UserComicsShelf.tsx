@@ -34,7 +34,6 @@ export const UserComicsShelf = ({
   const changeTab = (tab: listType) => {
     setActiveTab(tab);
   };
-  console.log(activeTab, comics);
   return (
     <div className={`${className} col gap-3`} {...props}>
       <Tabs
@@ -55,17 +54,20 @@ export const UserComicsShelf = ({
       </div>
       <ComicsGrid>
         {comics && comics.length > 0 ? (
-          comics.map(({ comic, comicData, lastChapter, updatedAt }) => (
-            <ComicCard
-              id={comic}
-              comicLayout={layout}
-              lastChapter={lastChapter}
-              createdAt={updatedAt}
-              key={comic}
-              cover={comicData.comicCover}
-              name={comicData.title}
-            />
-          ))
+          comics.map(
+            ({ comic, comicData, lastChapter, updatedAt, chaptersCount }) => (
+              <ComicCard
+                id={comic}
+                comicLayout={layout}
+                lastChapter={lastChapter}
+                chaptersCount={chaptersCount}
+                createdAt={updatedAt}
+                key={comic}
+                cover={comicData.comicCover}
+                name={comicData.title}
+              />
+            )
+          )
         ) : (
           <div>No comics there.</div>
         )}

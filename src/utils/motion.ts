@@ -1,4 +1,17 @@
 export const transition = { type: "spring", duration: 0.8 };
+export const genresListAnimation = {
+  initial: {
+    height: 394,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.01,
+    },
+  },
+  animate: {
+    height: 630,
+  },
+};
+
 export const secondLayerAnimation = {
   initial: {
     width: "var(--width-from)",

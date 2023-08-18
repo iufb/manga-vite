@@ -1,5 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react";
-export interface TagProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+import { LinkProps } from "react-router-dom";
+export interface TagProps extends LinkProps {
   name: string;
 }

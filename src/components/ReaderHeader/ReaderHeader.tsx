@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { setChaptersQuantity } from "../../redux/features/chapter/chapterSlice";
 import { motion } from "framer-motion";
 import { transition } from "../../utils/motion";
+import { Bookmark } from "../Bookmark/Bookmark";
 export const ReaderHeader = ({
   className,
   ...props
@@ -41,7 +42,7 @@ export const ReaderHeader = ({
   }, [data]);
   return (
     <motion.div
-      className={`${className} w-full h-12 sticky top-0  z-50 flex px-3 gap-3 bg-gray-700 text-customWhite items-center overflow-hidden `}
+      className={`${className} w-full h-12 sticky top-0  z-40 flex px-3 gap-3 bg-gray-700 text-customWhite items-center overflow-hidden `}
       {...props}
       initial={{ opacity: 0 }}
       animate={{
@@ -71,6 +72,7 @@ export const ReaderHeader = ({
             {data.comicName}
           </Link>
           <ChapterNavigation chaptersQuantity={data.chaptersQuantity} />
+          <Bookmark />
         </>
       )}
     </motion.div>

@@ -7,3 +7,12 @@ export const addComicToList = (list: addComicToListType) => {
 export const createList = (comicId: string) => {
   return instance().post("list/create", { comic: comicId });
 };
+export const updateLastChapter = (
+  userId: string,
+  comicId: string,
+  chapterNumber: number
+) => {
+  return instance().patch(`list/lastChapter/${userId}/${comicId}`, {
+    chapterNumber,
+  });
+};
