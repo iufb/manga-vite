@@ -24,10 +24,9 @@ export const RateButton = ({
   const startRate = () => {
     dispatch(updateModalStatus({ modal: "addRate", status: "open" }));
   };
-  console.log(rating?.rate);
   return (
     <div className={`${className}`} {...props}>
-      <button onClick={startRate} className="btn btn-sm">
+      <button onClick={startRate} className="btn btn-sm ">
         {rating?.rate ? (
           <span>{rating?.rate} - my rate</span>
         ) : (

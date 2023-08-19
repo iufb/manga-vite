@@ -24,6 +24,7 @@ export const RateModal = ({
     if (user && comicId) {
       addRatingToComic(comicId, user._id, selectedRating).then(() => {
         mutate(`rating/${user?._id}/${comicId}`);
+        mutate(`/rating/comic/${comicId}`);
         dispatch(
           setAlert({ alertStatus: "success", text: "Your rate added." })
         );

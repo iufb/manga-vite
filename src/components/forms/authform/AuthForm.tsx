@@ -23,8 +23,8 @@ export const AuthForm = ({
       if (response.data.access_token) {
         localStorage.setItem("token", response.data.access_token);
       }
+      response.status == 201 ? navigate("/login") : navigate("/home");
       setError("");
-      navigate("/home");
       mutate("user");
     } catch (e) {
       if (e instanceof AxiosError) {

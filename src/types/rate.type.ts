@@ -3,3 +3,7 @@ export type rateType = {
   comicId: string;
   rate: number;
 };
+export type comicRateType = {
+  averageRate: number;
+  rateNumber: number;
+};

@@ -73,9 +73,11 @@ export const ComicButton = ({
         }
         className="flex-1 center bg-indigoGrey text-customWhite py-1 rounded-md hover:bg-indigoLight disabled:bg-gray-500 disabled:cursor-not-allowed "
       >
-        {data?.lastChapter == 1 || comic.chaptersCount == 0
-          ? "Start reading"
-          : "Continue"}
+        {comic.chaptersCount > 0
+          ? data?.lastChapter
+            ? "Continue"
+            : "Start reading"
+          : "No chapters yet"}
       </button>
       <button
         onClick={() =>
@@ -91,7 +93,7 @@ export const ComicButton = ({
       <Dropdown
         values={listArray}
         valueColor={color}
-        selectedValue={list}
+        selectedValue={list ? list : "add to list"}
         selectValue={onSelect}
         className="mobile:hidden desktop:block"
       />

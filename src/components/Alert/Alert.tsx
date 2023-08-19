@@ -13,18 +13,18 @@ import { setAlert } from "../../redux/features/alert/alertSlice";
 export const Alert = ({ className, ...props }: AlertProps): JSX.Element => {
   const { alertStatus, text } = useAppSelector((state) => state.alert);
   const dispatch = useAppDispatch();
-  const getIcon = () => {
+  const getAlertStyle = () => {
     switch (alertStatus) {
       case null:
         return;
       case "warning":
-        return <AiOutlineWarning />;
+        return { icon: <AiOutlineWarning />, style: "alert-warning" };
       case "error":
-        return <BiErrorAlt />;
+        return { icon: <BiErrorAlt />, style: "alert-warning" };
       case "success":
-        return <AiFillCheckCircle />;
+        return { icon: <AiFillCheckCircle />, style: "alert-success" };
       case "info":
-        return <AiOutlineInfoCircle />;
+        return { icon: <AiOutlineInfoCircle />, style: "alert-info" };
     }
   };
   useEffect(() => {
@@ -34,13 +34,16 @@ export const Alert = ({ className, ...props }: AlertProps): JSX.Element => {
       }, 5000);
     }
   }, [alertStatus]);
+  console.log(`alert-${alertStatus}`);
   if (text && alertStatus) {
     return (
       <div
-        className={`alert  alert-${alertStatus} ${className}  absolute z-[100]  max-w-[500px] right-2 top-10 w-full justify-normal `}
+        className={`alert ${
+          getAlertStyle()?.style
+        } ${className} max-h-fit flex mobile:justify-center desktop:justify-normal  absolute z-[100]  desktop:max-w-[450px] mobile:max-w-[300px] desktop:right-2 desktop:top-10 mobile:top-5 mobile:right-[50%] desktop:translate-x-0 mobile:translate-x-[50%] w-full `}
         {...props}
       >
-        {getIcon()}
+        {getAlertStyle()?.icon}
         <span>{text}</span>
       </div>
     );
