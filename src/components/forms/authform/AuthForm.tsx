@@ -34,7 +34,7 @@ export const AuthForm = ({
   };
   return (
     <form
-      className={`${className} w-full col gap-4 mobile:px-4 tablet:px-10  desktop:tablet:px-20`}
+      className={`${className} w-full col gap-4  mobile:px-1 tablet:px-4  desktop:px-8`}
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >

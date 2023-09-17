@@ -42,7 +42,7 @@ export const ReaderHeader = ({
   }, [data]);
   return (
     <motion.div
-      className={`${className} w-full h-12 sticky top-0  z-40 flex px-3 gap-3 bg-gray-700 text-customWhite items-center overflow-hidden `}
+      className={`${className} w-full h-12 sticky top-0  z-50 flex px-3 gap-3 bg-gray-700 text-customWhite items-center  `}
       {...props}
       initial={{ opacity: 0 }}
       animate={{

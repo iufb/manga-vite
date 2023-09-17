@@ -12,8 +12,12 @@ export type addComicToListType = {
 
   listType: listType;
 
-  lastChapter?: number;
+  lastChapter?: lastChapterType;
 };
 export type createList = {
   comic: string;
+};
+export type lastChapterType = {
+  chapter: number;
+  page: number;
 };

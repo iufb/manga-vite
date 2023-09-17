@@ -15,7 +15,7 @@ export const ImagePreview = ({
   return (
     <div
       {...props}
-      className={`relative center  ${className} h-fit `}
+      className={`relative center  ${className} h-fit  `}
       style={{
         width,
       }}

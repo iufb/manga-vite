@@ -10,9 +10,11 @@ export const createList = (comicId: string) => {
 export const updateLastChapter = (
   userId: string,
   comicId: string,
-  chapterNumber: number
+  chapterNumber: number,
+  page: number
 ) => {
   return instance().patch(`list/lastChapter/${userId}/${comicId}`, {
     chapterNumber,
+    page,
   });
 };

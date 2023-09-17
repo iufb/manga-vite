@@ -4,6 +4,7 @@ import modalReducer from "./features/modal/modalSlice";
 import pageReducer from "./features/page/pageSlice";
 import alertReducer from "./features/alert/alertSlice";
 import comicReducer from "./features/comic/comicSlice";
+import sortReducer from "./features/sort/sortSlice";
 export const store = configureStore({
   reducer: {
     comic: comicReducer,
@@ -11,6 +12,7 @@ export const store = configureStore({
     page: pageReducer,
     modal: modalReducer,
     alert: alertReducer,
+    sort: sortReducer,
   },
 });
 

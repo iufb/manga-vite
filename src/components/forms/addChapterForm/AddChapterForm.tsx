@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { setAlert } from "../../../redux/features/alert/alertSlice";
 import { Input } from "../../inputs/Input/Input";
 import { ChapterPreview } from "../../ChapterPreview/ChapterPreview";
+import { mutate } from "swr";
 export const AddChapterForm = ({
   className,
   ...props
@@ -28,6 +29,7 @@ export const AddChapterForm = ({
     })
       .then(() => {
         navigate(`/comic/${comicId}`);
+        mutate(`chapter/byComic/${comicId}`);
       })
       .catch((e) => {
         if (e instanceof AxiosError) {

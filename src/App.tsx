@@ -4,7 +4,8 @@ import {
   AddComicPage,
   CatalogPage,
   ComicPage,
-  EditProfilePage, HomePage,
+  EditProfilePage,
+  HomePage,
   LoginPage,
   ReaderPage,
   RegisterPage,
@@ -12,11 +13,9 @@ import {
 } from "./pages";
 import { BaseLayout, ReaderLayout } from "./layouts";
 import { Alert } from "./components/Alert/Alert";
-import { useWindowSize } from "./hooks/useWindowSize";
-import { MobileLayout } from "./layouts/MobileLayout/MobileLayout";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
-  const { width } = useWindowSize();
   return (
     <>
       <Alert />
@@ -24,19 +23,41 @@ function App() {
         <Routes>
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route
-            path="/"
-            element={width > 640 ? <BaseLayout /> : <MobileLayout />}
-          >
+          <Route path="/" element={<BaseLayout />}>
             <Route path="home" element={<HomePage />} />
             <Route path="catalog" element={<CatalogPage />} />
-            <Route path="add" element={<AddComicPage />} />
-            <Route path="user" element={<UserPage />} />
-            <Route path="user/edit" element={<EditProfilePage />} />
+            <Route
+              path="add"
+              element={
+                <ProtectedRoute>
+                  <AddComicPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="user"
+              element={
+                <ProtectedRoute>
+                  <UserPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="user/edit"
+              element={
+                <ProtectedRoute>
+                  <EditProfilePage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="comic/:comicId" element={<ComicPage />} />
             <Route
               path="comic/:comicId/add-chapter"
-              element={<AddChapterPage />}
+              element={
+                <ProtectedRoute>
+                  <AddChapterPage />
+                </ProtectedRoute>
+              }
             />
           </Route>
           <Route path="/reader" element={<ReaderLayout />}>

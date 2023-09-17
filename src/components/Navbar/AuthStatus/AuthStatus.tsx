@@ -32,6 +32,7 @@ export const AuthStatus = () => {
   const dispatch = useAppDispatch();
   const logout = () => {
     localStorage.removeItem("token");
+    mutate("user");
     setToken(null);
     dispatch(updateModalStatus({ status: "close", modal: "authModalState" }));
   };

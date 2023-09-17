@@ -1,4 +1,4 @@
-import { AiOutlineDown, AiOutlineFolder } from "react-icons/ai";
+import { AiOutlineDown } from "react-icons/ai";
 import { DropdownProps } from "./Dropdown.props";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
@@ -7,6 +7,8 @@ export const Dropdown = ({
   values,
   selectedValue,
   selectValue,
+  icon,
+  height,
   valueColor,
   className,
   ...props
@@ -14,7 +16,8 @@ export const Dropdown = ({
   const [show, setShow] = useState<boolean>(false);
   const variants = {
     visible: {
-      height: 135,
+      height,
+      width: "100%",
       marginBottom: 20,
       padding: 5,
       transition: {
@@ -42,16 +45,22 @@ export const Dropdown = ({
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setShow(false));
   return (
-    <div className={` ${className} w-full dropdown  `} {...props} ref={ref}>
-      <label
+    <div
+      className={` ${className} w-full min-w-[200px] dropdown  `}
+      {...props}
+      ref={ref}
+    >
+      <div
         tabIndex={0}
         onClick={() => setShow((prev) => !prev)}
-        className={`${valueColor} text-customWhite  w-full center py-1  rounded-md cursor-pointer flex px-3  `}
+        className={`${valueColor}  ${
+          valueColor ? "text-customWhite" : "text-black"
+        }  w-full center py-1  rounded-md cursor-pointer flex px-3  `}
       >
-        <AiOutlineFolder />
+        {icon}
         <span className="flex-1 center capitalize">{selectedValue}</span>
         <AiOutlineDown />
-      </label>
+      </div>
       <AnimatePresence>
         <motion.ul
           variants={variants}
@@ -68,7 +77,9 @@ export const Dropdown = ({
                 selectValue(value);
                 setShow(false);
               }}
-              className="capitalize cursor-pointer  hover:bg-gray-400 center justify-start hover:text-customWhite rounded-md"
+              className={`capitalize cursor-pointer ${
+                value == selectedValue && "bg-gray-500 text-customWhite"
+              }  hover:bg-gray-400 center justify-start hover:text-customWhite rounded-md`}
             >
               <a>{value}</a>
             </motion.li>

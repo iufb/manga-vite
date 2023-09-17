@@ -33,14 +33,14 @@ export const MultiSelect = ({
       <div
         className={`flex ${
           isFocus && "border"
-        } border-indigoGrey p-2 rounded-md  `}
+        } border-indigoGrey p-2 rounded-md mobile:col tablet:flex-row gap-1  `}
       >
         {state.length > 0 && (
           <div className="flex  gap-2 top-2 px-2  flex-wrap max-w-[400px] ">
             {state.map((value, idx) => (
               <div
                 key={idx}
-                className="bg-indigoGrey rounded-md text-customWhite cursor-pointer p-1 flex items-center  gap-2 "
+                className="bg-indigoGrey rounded-md text-customWhite cursor-pointer tablet:p-1 mobile:p-[2px] tablet:text-md mobile:text-sm flex items-center  tablet:gap-2 mobile:gap-1 "
               >
                 {value}
                 <AiOutlineClose onClick={() => handleDelete(value)} />

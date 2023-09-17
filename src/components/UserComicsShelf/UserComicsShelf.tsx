@@ -69,7 +69,7 @@ export const UserComicsShelf = ({
             )
           )
         ) : (
-          <div>No comics there.</div>
+          <div className="text-gray-400 text-lg">List is empty.</div>
         )}
       </ComicsGrid>
     </div>

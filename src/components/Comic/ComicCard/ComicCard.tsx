@@ -40,7 +40,7 @@ export const ComicCard = ({
             src={cover}
             width={147}
             height={206}
-            className="rounded-md   h-[206px]"
+            className="rounded-md h-[206px]"
           />
           <div className="absolute z-20 bottom-0 left-0 pl-1 col  overflow-hidden text-customWhite font-bold w-[147px]   cardTitle  rounded-b-md ">
             <span>{type}</span>
@@ -62,10 +62,10 @@ export const ComicCard = ({
             </Link>
             {chaptersCount > 0 ? (
               <Link
-                to={`/reader/${id}/${lastChapter}?page=1`}
+                to={`/reader/${id}/${lastChapter?.chapter}?page=${lastChapter?.page}`}
                 className="text-gray-400"
               >
-                Continue {lastChapter} chapter
+                Continue {lastChapter?.chapter} chapter
               </Link>
             ) : (
               <span className="text-gray-400">No chapters found.</span>

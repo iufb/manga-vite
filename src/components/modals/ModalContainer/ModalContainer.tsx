@@ -10,11 +10,11 @@ export const ModalContainer = ({
   return (
     <motion.div
       key="modalContainer"
-      className={`fixed z-50 left-0 top-0   w-full  min-h-screen  h-full ${className}  ${
+      className={` fixed h-screen  z-50 left-0 top-0   w-full  min-h-screen  ${className}  ${
         scroll && "overflow-y-scroll"
       }  bg-opacity-60  ${
         center && "grid justify-center items-center"
-      } bg-gray-900 `}
+      } bg-gray-900  `}
       {...opacityAnimation}
     >
       {children}

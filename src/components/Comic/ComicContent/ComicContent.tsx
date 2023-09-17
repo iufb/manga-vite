@@ -14,7 +14,7 @@ export const ComicContent = ({
 }: ComicContentProps): JSX.Element => {
   return (
     <div
-      className={`${className} flex desktop:flex-row mobile:flex-col gap-2 z-50 mb-2 `}
+      className={`${className} flex desktop:items-start desktop:flex-row mobile:flex-col  gap-2 z-50  h-fit  `}
       {...props}
     >
       <div className="col desktop:gap-1 mobile:gap-0 mobile:center  desktop:bg-inherit z-10  ">
@@ -35,9 +35,9 @@ export const ComicContent = ({
         />
 
         <ComicButton comic={comic} />
-        <ComicInfo comic={comic} className=" " />
+        <ComicInfo comic={comic} />
       </div>
-      <div className="z-0 w-full">
+      <div className="z-0 w-full mb-10">
         <ComicHeader
           title={comic.title}
           className="mobile:hidden desktop:flex"

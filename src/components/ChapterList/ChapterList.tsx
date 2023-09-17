@@ -21,7 +21,7 @@ export const ChapterList = ({
   };
   return (
     <div
-      className={`${className}  h-full bg-gray-800 col gap-2 pt-4 pl-4`}
+      className={`${className} w-full h-full bg-gray-800 col gap-2 pt-4 pl-4`}
       {...props}
     >
       <div className="text-white flex justify-between px-4 ">

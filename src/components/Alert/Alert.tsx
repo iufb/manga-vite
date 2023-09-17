@@ -34,7 +34,6 @@ export const Alert = ({ className, ...props }: AlertProps): JSX.Element => {
       }, 5000);
     }
   }, [alertStatus]);
-  console.log(`alert-${alertStatus}`);
   if (text && alertStatus) {
     return (
       <div

@@ -1,12 +1,14 @@
 import { ComicTabContentProps } from "./ComicTabContent.props";
 import { Tabs } from "../../Tabs/Tabs";
 import { Tag } from "../../Tag/Tag";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import useSWR from "swr";
 import { useNavigate, useParams } from "react-router-dom";
 import { chapterType } from "../../../types/chapter.type";
 import fetcher from "../../../api/axios-client";
-const tabs = ["Information", "Chapters"];
+import { Comment } from "../../Comment/Comment";
+import { Loader } from "../../Loader/Loader";
+const tabs = ["Information", "Chapters", "Comments"];
 export const ComicTabContent = ({
   description,
   genres,
@@ -19,12 +21,7 @@ export const ComicTabContent = ({
   const navigate = useNavigate();
   const { data: chapters } = useSWR<chapterType[]>(
     `chapter/byComic/${comicId}`,
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
+    fetcher
   );
 
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
@@ -97,6 +94,11 @@ export const ComicTabContent = ({
         ) : (
           <div className="text-gray-400 center ">Chapters not found.</div>
         ))}
+      {activeTab == "Comments" && (
+        <Suspense fallback={<Loader size="md" />}>
+          <Comment type="comic" className="tablet:max-w-full" />
+        </Suspense>
+      )}
     </div>
   );
 };

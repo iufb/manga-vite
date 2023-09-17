@@ -12,7 +12,6 @@ export const Rating = ({ className, ...props }: RatingProps): JSX.Element => {
     comicId && `/rating/comic/${comicId}`,
     fetcher
   );
-  console.log(comicRate);
   return (
     <>
       <div

@@ -22,6 +22,10 @@ export const RateButton = ({
     fetcher
   );
   const startRate = () => {
+    if (!user) {
+      dispatch(updateModalStatus({ modal: "accessModal", status: "open" }));
+      return;
+    }
     dispatch(updateModalStatus({ modal: "addRate", status: "open" }));
   };
   return (

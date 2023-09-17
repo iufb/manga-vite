@@ -9,7 +9,6 @@ export const instance = (auth?: string) =>
       },
     },
   });
-
 const fetcher = (
   url: string,
   auth?: string,

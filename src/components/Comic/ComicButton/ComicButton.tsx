@@ -3,7 +3,7 @@ import { listArray } from "../../../utils/constants";
 import { Dropdown } from "../../Dropdown/Dropdown";
 import { ComicButtonProps } from "./ComicButton.props";
 import { useEffect, useState } from "react";
-import { listType } from "../../../types/list.type";
+import { listType, lastChapterType } from "../../../types/list.type";
 import { addComicToList } from "../../../api/list/list";
 import { useAuth } from "../../../hooks";
 import useSWR from "swr";
@@ -11,13 +11,14 @@ import fetcher from "../../../api/axios-client";
 import { BsBookmark } from "react-icons/bs";
 import { useAppDispatch } from "../../../redux/hooks";
 import { updateModalStatus } from "../../../redux/features/modal/modalSlice";
+import { AiOutlineFolder } from "react-icons/ai";
 export const ComicButton = ({
   comic,
   className,
   ...props
 }: ComicButtonProps): JSX.Element => {
   const { user } = useAuth();
-  const { data } = useSWR<{ listType: listType; lastChapter: number }>(
+  const { data } = useSWR<{ listType: listType; lastChapter: lastChapterType }>(
     `list/${comic._id}/${user?._id}`,
     fetcher
   );
@@ -43,16 +44,43 @@ export const ComicButton = ({
         setColor("bg-indigoGrey hover:bg-indigoLight");
     }
   };
+  const getButtonText = () => {
+    if (comic.chaptersCount == 0) {
+      return "No chapters yet";
+    } else {
+      if (data?.lastChapter.chapter !== 1 || data?.lastChapter.page !== 1) {
+        return "Continue";
+      }
+      return "Start reading";
+    }
+  };
+  const navigatoToChapter = () => {
+    const lastChapter = data?.lastChapter.chapter
+      ? data.lastChapter.chapter
+      : 1;
+    const page = data?.lastChapter.page ? data.lastChapter.page : 1;
+    navigate(`/reader/${comic._id}/${lastChapter}?page=${page}`);
+  };
+  const openListModal = () => {
+    if (!user) {
+      dispatch(updateModalStatus({ modal: "accessModal", status: "open" }));
+      return;
+    }
+    dispatch(updateModalStatus({ modal: "addToListModal", status: "open" }));
+  };
   const onSelect = (value: listType) => {
+    if (!user) {
+      dispatch(updateModalStatus({ modal: "accessModal", status: "open" }));
+      return;
+    }
     setList(value);
     changeColor(value);
-    if (user) {
-      addComicToList({
-        user: user._id,
-        comic: comic._id,
-        listType: value,
-      });
-    }
+    addComicToList({
+      comic: comic._id,
+      user: user._id,
+      listType: value,
+      lastChapter: { chapter: 1, page: 1 },
+    });
   };
 
   useEffect(() => {
@@ -68,29 +96,21 @@ export const ComicButton = ({
     >
       <button
         disabled={comic.chaptersCount == 0}
-        onClick={() =>
-          navigate(`/reader/${comic._id}/${data?.lastChapter}?page=1`)
-        }
+        onClick={navigatoToChapter}
         className="flex-1 center bg-indigoGrey text-customWhite py-1 rounded-md hover:bg-indigoLight disabled:bg-gray-500 disabled:cursor-not-allowed "
       >
-        {comic.chaptersCount > 0
-          ? data?.lastChapter
-            ? "Continue"
-            : "Start reading"
-          : "No chapters yet"}
+        {getButtonText()}
       </button>
       <button
-        onClick={() =>
-          dispatch(
-            updateModalStatus({ modal: "addToListModal", status: "open" })
-          )
-        }
+        onClick={openListModal}
         className={` flex-1  mobile:flex gap-2 desktop:hidden center rounded-md  capitalize ${color}  text-customWhite py-1 `}
       >
         <BsBookmark />
         <span>{list}</span>
       </button>
       <Dropdown
+        icon={<AiOutlineFolder />}
+        height={135}
         values={listArray}
         valueColor={color}
         selectedValue={list ? list : "add to list"}

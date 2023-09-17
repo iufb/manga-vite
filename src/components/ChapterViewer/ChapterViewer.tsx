@@ -10,6 +10,7 @@ import { setPagesQuantity } from "../../redux/features/chapter/chapterSlice";
 import { scrollToTop } from "../../utils/helpers";
 import { updateLastChapter } from "../../api/list/list";
 import { useAuth } from "../../hooks";
+import { ReaderNavigation } from "../ReaderHeader/ReaderNavigation/ReaderNavigation";
 export const ChapterViewer = ({
   className,
   ...props
@@ -22,6 +23,7 @@ export const ChapterViewer = ({
   const currentPage = Number(searchParams.get("page"));
   const dispatch = useAppDispatch();
   const { data } = useSWR<{
+    chapterId: string;
     baseUrl: string;
     pagesQuantity: number;
     prevChapterPageQuantity: number;
@@ -38,15 +40,24 @@ export const ChapterViewer = ({
       if (Number(chapterNumber) == chaptersQuantity) {
         navigate(`/comic/${comicId}`);
         if (user && comicId && chapterNumber) {
-          updateLastChapter(user?._id, comicId, Number(chapterNumber));
-
+          updateLastChapter(
+            user?._id,
+            comicId,
+            Number(chapterNumber),
+            currentPage
+          );
           mutate(`list/lastChapter/${user._id}/${comicId}`);
         }
         return;
       } else {
         navigate(`/reader/${comicId}/${Number(chapterNumber) + 1}?page=1`);
         if (user && comicId && chapterNumber) {
-          updateLastChapter(user?._id, comicId, Number(chapterNumber));
+          updateLastChapter(
+            user?._id,
+            comicId,
+            Number(chapterNumber),
+            currentPage
+          );
           mutate(`list/lastChapter/${user._id}/${comicId}`);
         }
         return;
@@ -56,6 +67,7 @@ export const ChapterViewer = ({
   };
   const goBack = () => {
     setLoading(true);
+
     scrollToTop();
     if (currentPage == 1) {
       if (Number(chapterNumber) == 1) {
@@ -74,9 +86,9 @@ export const ChapterViewer = ({
   };
 
   return (
-    <div className={`${className} relative`} {...props}>
+    <div className={`${className} relative w-full grid `} {...props}>
       {currentPage && (
-        <>
+        <div className=" justify-self-center">
           <div
             className="absolute left-0 top-0 z-40 w-[50%] h-full cursor-pointer"
             onClick={goBack}
@@ -95,8 +107,10 @@ export const ChapterViewer = ({
             className="absolute right-0 top-0 z-40 w-[50%] h-full cursor-pointer"
             onClick={goForward}
           />
-        </>
+        </div>
       )}
+
+      <ReaderNavigation className="sticky z-51 left-5 bottom-5" />
     </div>
   );
 };

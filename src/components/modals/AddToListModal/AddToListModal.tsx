@@ -38,7 +38,7 @@ export const AddToListModal = ({
     <BaseModal
       modalType="addToListModal"
       title="Add to list"
-      className={`${className} bg-customWhite h-[200px] rounded-t-xl p-3 absolute bottom-0 w-full`}
+      className={`${className}  bg-customWhite h-[200px] rounded-t-xl p-3  w-full items-start`}
       {...props}
     >
       <ul className="col gap-2 capitalize px-2 text-gray-800">

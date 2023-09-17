@@ -1,3 +1,5 @@
+import { lastChapterType } from "./list.type";
+
 export interface IComic {
   _id: string;
   comicCover: string;
@@ -13,10 +15,14 @@ export interface IComic {
   author: string;
   artist: string;
   publishingCompany: string;
+  rate: number;
+  rateCount: number;
+  createdAt: string;
+  updatedAt: string;
 }
 export interface IListComic {
   comic: string;
-  lastChapter: number;
+  lastChapter: lastChapterType;
   chaptersCount: number;
   updatedAt: string;
   comicData: {

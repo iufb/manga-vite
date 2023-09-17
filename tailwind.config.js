@@ -36,6 +36,15 @@ export default {
         lightGrey: "#d4dcda",
         customWhite: "#f4f4f4",
       },
+      keyframes: {
+        blink: {
+          "0%": { opacity: "0%" },
+          "100%": { opacity: "100%" },
+        },
+      },
+      animation: {
+        blink: "blink 1s infinite",
+      },
     },
   },
   plugins: [require("daisyui")],

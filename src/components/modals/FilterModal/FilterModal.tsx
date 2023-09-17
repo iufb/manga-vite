@@ -10,7 +10,7 @@ export const FilterModal = ({
     <BaseModal
       title="Filter"
       modalType="filterModalState"
-      className={`${className} w-full h-screen bg-customWhite px-2 py-4 `}
+      className={`${className} w-full h-screen bg-customWhite px-2 py-4 overflow-hidden `}
       {...props}
     >
       <FilterForm />

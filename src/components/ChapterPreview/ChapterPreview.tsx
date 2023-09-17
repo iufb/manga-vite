@@ -19,11 +19,11 @@ export const ChapterPreview = ({
   const dispatch = useAppDispatch();
   return (
     <div
-      className={` ${className} w-full min-h-[500px] h-full  bg-white center p-10`}
+      className={` ${className} w-full min-h-[500px]   bg-white center p-10`}
       {...props}
     >
       {pages ? (
-        <div className="flex h-full flex-wrap gap-2 justify-center ">
+        <div className="flex   flex-wrap gap-2 justify-center  h-full ">
           {pages.map((page, idx) => (
             <ImagePreview
               src={page}

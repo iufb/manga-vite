@@ -12,7 +12,7 @@ export const BaseModal = ({
 }: BaseModalProps): JSX.Element => {
   const dispatch = useAppDispatch();
   return (
-    <div className={`${className} relative`} {...props}>
+    <div className={`${className} absolute justify-self-center`} {...props}>
       <h2 className="text-lg mb-2 text-gray-800">{title} :</h2>
       <AiOutlineClose
         className="absolute right-2 top-2 text-xl z-40 cursor-pointer"

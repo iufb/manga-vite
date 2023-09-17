@@ -3,35 +3,30 @@ import { ReaderLayoutProps } from "./ReaderLayout.props";
 import { ReaderHeader } from "../../components";
 import { ModalContainer } from "../../components/modals/ModalContainer/ModalContainer";
 import { SlidePanel } from "../../components/SlidePanel/SlidePanel";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ChapterList } from "../../components/ChapterList/ChapterList";
 import { ReaderNavigation } from "../../components/ReaderHeader/ReaderNavigation/ReaderNavigation";
-import { useEffect } from "react";
-import { updateAllModals } from "../../redux/features/modal/modalSlice";
 import { AnimatePresence } from "framer-motion";
+import { AccessModal } from "../../components/modals/AccessModal/AccessModal";
 
 export const ReaderLayout = ({
   className,
   ...props
 }: ReaderLayoutProps): JSX.Element => {
-  const { sidebarModalState, chapterListModalState } = useAppSelector(
-    (state) => state.modal
-  );
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(updateAllModals("close"));
-  }, []);
+  const { isModalOpen, sidebarModalState, chapterListModalState, accessModal } =
+    useAppSelector((state) => state.modal);
   return (
     <>
       <div
-        className={`${className} layout bg-gray-500 relative min-h-screen h-full `}
+        className={`${className} layout bg-gray-500 relative min-h-screen ${
+          isModalOpen ? "h-screen" : "h-full"
+        } `}
         {...props}
       >
         <ReaderHeader />
-        <main className={`flex-1`}>
+        <main className={`  ${isModalOpen && "overflow-hidden"}  `}>
           <Outlet />
-          <ReaderNavigation className="sticky z-50 left-5 bottom-5" />
         </main>
       </div>
       <AnimatePresence>
@@ -46,6 +41,13 @@ export const ReaderLayout = ({
           <ModalContainer center={false} key="chapterlist">
             <SlidePanel position="right" modal="chapterListModalState">
               <ChapterList />
+            </SlidePanel>
+          </ModalContainer>
+        )}
+        {accessModal == "open" && (
+          <ModalContainer key="accessModal">
+            <SlidePanel position="up" modal="accessModal">
+              <AccessModal />
             </SlidePanel>
           </ModalContainer>
         )}

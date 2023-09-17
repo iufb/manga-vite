@@ -3,23 +3,25 @@ import { SlidePanel } from "../../components/SlidePanel/SlidePanel";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { useAppSelector } from "../../redux/hooks";
 import { AnimatePresence } from "framer-motion";
-import { Navbar } from "../../components";
 import { Outlet } from "react-router-dom";
 import { FilterModal } from "../../components/modals/FilterModal/FilterModal";
 import { AddToListModal } from "../../components/modals/AddToListModal/AddToListModal";
+import { SortModal } from "../../components/modals/SortModal/SortModal";
 
 export const MobileLayout = () => {
-  const { sidebarModalState, filterModalState, addToListModal } =
-    useAppSelector((state) => state.modal);
+  const {
+    isModalOpen,
+    sidebarModalState,
+    filterModalState,
+    addToListModal,
+    sort,
+  } = useAppSelector((state) => state.modal);
 
   return (
     <>
-      <div className="layout h-screen  bg-lightGrey">
-        <Navbar />
-        <main>
-          <Outlet />
-        </main>
-      </div>
+      <main className={`${isModalOpen && "overflow-hidden"}`}>
+        <Outlet />
+      </main>
       <AnimatePresence>
         {sidebarModalState == "open" && (
           <ModalContainer center={false} key="modal">
@@ -37,8 +39,15 @@ export const MobileLayout = () => {
         )}
         {addToListModal == "open" && (
           <ModalContainer center={false} key="modal">
-            <SlidePanel position="up" modal="addToListModal">
+            <SlidePanel position="up" modal="addToListModal" bottom>
               <AddToListModal />
+            </SlidePanel>
+          </ModalContainer>
+        )}
+        {sort == "open" && (
+          <ModalContainer center={false} key="modal">
+            <SlidePanel position="up" modal="sort">
+              <SortModal />
             </SlidePanel>
           </ModalContainer>
         )}

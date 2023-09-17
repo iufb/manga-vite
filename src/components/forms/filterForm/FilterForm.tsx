@@ -13,17 +13,21 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { filterComics } from "../../../api/comic/comic";
 import { FilterFormItem } from "./FilterFormItem/FilterFormItem";
 import { AxiosError } from "axios";
-import { useAppDispatch } from "../../../redux/hooks";
-import { updateComics } from "../../../redux/features/comic/comicSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 import { updateModalStatus } from "../../../redux/features/modal/modalSlice";
 import { useSearchParams } from "react-router-dom";
+import {
+  setError,
+  updateComics,
+} from "../../../redux/features/comic/comicSlice";
 
 export const FilterForm = ({
   className,
   ...props
 }: FilterFormProps): JSX.Element => {
   const [secondLayer, setSecondLayer] = useState(false);
+  const { sortType, direction } = useAppSelector((state) => state.sort);
   const dispatch = useAppDispatch();
   const { width } = useWindowSize();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -45,7 +49,11 @@ export const FilterForm = ({
   };
   const onSubmit: SubmitHandler<filterFormType> = async (data) => {
     try {
-      const { data: comics } = await filterComics(data);
+      const { data: comics } = await filterComics({
+        ...data,
+        sortType,
+        sortDirection: direction,
+      });
       setSearchParams(data);
       dispatch(updateComics(comics));
       dispatch(
@@ -53,17 +61,18 @@ export const FilterForm = ({
       );
     } catch (e) {
       if (e instanceof AxiosError) {
-        dispatch(updateComics([]));
+        dispatch(setError(true));
       }
     }
   };
   const resetForm = () => {
-    reset();
+    reset({ genres: [], status: [], translateStatus: [], type: [] });
+    setSearchParams();
   };
 
   return (
     <motion.form
-      className={`${className}  relative tablet:max-w-[314px]  w-full   col gap-4 bg-customWhite  p-2 rounded-md desktop:[--filter-form-width:314px] mobile:[--filter-form-width:100%]  tablet:[--height-from:420px]  tablet:[--height-to:780px]  mobile:[--height-from:95%] mobile:[--height-to:95%] `}
+      className={`${className}  relative tablet:p-2 mobile:p-0 tablet:max-w-[314px]  w-full   col gap-4 bg-customWhite  rounded-md desktop:[--filter-form-width:314px] mobile:[--filter-form-width:100%]  tablet:[--height-from:420px]  tablet:[--height-to:780px]  mobile:[--height-from:95%] mobile:[--height-to:95%] `}
       onSubmit={handleSubmit(onSubmit)}
       initial={filterFormAnimation.initial}
       animate={

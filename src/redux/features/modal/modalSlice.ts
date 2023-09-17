@@ -7,9 +7,11 @@ export type modalType =
   | "previewModalState"
   | "filterModalState"
   | "addToListModal"
-  | "addRate";
+  | "addRate"
+  | "sort"
+  | "accessModal";
 export interface ModalState {
-  globalModal: statusType;
+  isModalOpen: boolean;
   authModalState: statusType;
   previewModalState: statusType;
   sidebarModalState: statusType;
@@ -17,10 +19,12 @@ export interface ModalState {
   filterModalState: statusType;
   addToListModal: statusType;
   addRate: statusType;
+  sort: statusType;
+  accessModal: statusType;
 }
 
 const initialState: ModalState = {
-  globalModal: "close",
+  isModalOpen: false,
   previewModalState: "close",
   authModalState: "close",
   sidebarModalState: "close",
@@ -28,6 +32,8 @@ const initialState: ModalState = {
   filterModalState: "close",
   addToListModal: "close",
   addRate: "close",
+  sort: "close",
+  accessModal: "close",
 };
 
 export const modalSlice = createSlice({
@@ -38,15 +44,18 @@ export const modalSlice = createSlice({
       state,
       action: PayloadAction<{ status: statusType; modal: modalType }>
     ) => {
+      if (action.payload.modal !== "authModalState") {
+        //to disable scroll, when modal is open
+        if (action.payload.status == "open") {
+          state.isModalOpen = true;
+        }
+        if (action.payload.status == "close") {
+          state.isModalOpen = false;
+        }
+      }
       state[action.payload.modal] = action.payload.status;
-      state.globalModal = action.payload.status;
-    },
-    updateAllModals: (state, action: PayloadAction<statusType>) => {
-      state.chapterListModalState = action.payload;
-      state.sidebarModalState = action.payload;
-      state.authModalState = action.payload;
     },
   },
 });
-export const { updateModalStatus, updateAllModals } = modalSlice.actions;
+export const { updateModalStatus } = modalSlice.actions;
 export default modalSlice.reducer;

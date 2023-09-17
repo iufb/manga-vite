@@ -31,7 +31,7 @@ export const ReaderNavigation = ({
       items={pageNavigationValues}
       onChange={handleChange}
       currentValue={`${currentPage}/ ${pagesQuantity}`}
-      className={`${className} desktop:select-md tablet:select-sm mobile:select-xs `}
+      className={`${className} desktop:select-md tablet:select-sm mobile:select-xs max-w-[100px] `}
     />
   );
 };

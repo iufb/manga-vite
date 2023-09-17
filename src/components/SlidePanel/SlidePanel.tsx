@@ -9,6 +9,7 @@ export const SlidePanel = ({
   children,
   position,
   modal,
+  bottom,
   className,
   ...props
 }: SlidePanelProps): JSX.Element => {
@@ -19,7 +20,13 @@ export const SlidePanel = ({
   });
   return (
     <motion.div
-      className={`${className} h-full w-full desktop:max-w-[380px] mobile:max-w-full absolute overflow-hidden ${
+      className={`${className}  flex  ${
+        bottom ? "items-end" : "items-center"
+      } h-full w-full ${
+        modal == "accessModal"
+          ? "desktop:max-w-full justify-center"
+          : "desktop:max-w-[380px] justify-end"
+      } mobile:max-w-full absolute overflow-hidden ${
         position == "left" ? "left-0" : "right-0"
       } z-70`}
       {...slideAnimation(position)}

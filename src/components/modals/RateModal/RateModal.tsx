@@ -36,7 +36,7 @@ export const RateModal = ({
     <BaseModal
       title="Rate this comic"
       modalType="addRate"
-      className={`${className} bg-customWhite p-4 rounded-md `}
+      className={`${className} bg-customWhite p-4 rounded-md  `}
       {...props}
     >
       <div className="col gap-3">
