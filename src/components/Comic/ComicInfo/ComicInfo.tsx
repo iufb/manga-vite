@@ -1,13 +1,15 @@
-import { comicFormType } from "../../../types/comic.type";
 import { ComicInfoProps } from "./ComicInfo.props";
 import { ComicInfoListValue } from "./ComicInfoListValue";
-
+type infoType = {
+  name: string;
+  value: string;
+};
 export const ComicInfo = ({
   className,
   comic,
   ...props
 }: ComicInfoProps): JSX.Element => {
-  const info = comic && [
+  const info: infoType[] | null = comic && [
     { name: "Type", value: comic["type"] },
     {
       name: "Status",
@@ -40,7 +42,7 @@ export const ComicInfo = ({
       {...props}
     >
       {info &&
-        info.map(({ name, value }: { name: string; value: comicFormType }) => (
+        info.map(({ name, value }) => (
           <ComicInfoListValue name={name} value={value} key={name} />
         ))}
     </ul>

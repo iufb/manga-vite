@@ -8,11 +8,6 @@ import {
 } from "../../../redux/features/sort/sortSlice";
 import { updateModalStatus } from "../../../redux/features/modal/modalSlice";
 import { useWindowSize } from "../../../hooks/useWindowSize";
-import {
-  sortComics,
-  updateComics,
-} from "../../../redux/features/comic/comicSlice";
-import { getAllComics } from "../../../api/comic/comic";
 export type sortValuesType = {
   value: SortType;
   label: string;

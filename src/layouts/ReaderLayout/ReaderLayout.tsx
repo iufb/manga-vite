@@ -6,7 +6,6 @@ import { SlidePanel } from "../../components/SlidePanel/SlidePanel";
 import { useAppSelector } from "../../redux/hooks";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ChapterList } from "../../components/ChapterList/ChapterList";
-import { ReaderNavigation } from "../../components/ReaderHeader/ReaderNavigation/ReaderNavigation";
 import { AnimatePresence } from "framer-motion";
 import { AccessModal } from "../../components/modals/AccessModal/AccessModal";
 
