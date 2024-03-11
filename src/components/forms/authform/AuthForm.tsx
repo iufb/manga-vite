@@ -38,7 +38,7 @@ export const AuthForm = ({
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Input
+      <Inputgit@github.com:iufb/manga-vite.git
         type="email"
         title="Email"
         {...register("login", { required: true })}
