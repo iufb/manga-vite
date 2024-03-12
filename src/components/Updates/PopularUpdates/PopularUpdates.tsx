@@ -23,8 +23,8 @@ export const PopularUpdates = ({
       <h2 className="text-lg font-bold text-gray-600 border-b w-full pb-1 border-gray-300">
         Popular updates:
       </h2>
-      <div className="w-full flex gap-4 overflow-x-scroll custom-scrollbar pb-3">
-        {isLoading && <Loader size="lg" />}
+      <div className="w-full flex justify-center gap-4 overflow-x-scroll custom-scrollbar pb-3">
+        {isLoading && <Loader size="md" className="justify-self-center " />}
         {popular &&
           popular.map((chapter) => (
             <div key={chapter._id} className="col gap-1">
