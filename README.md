@@ -1,4 +1,4 @@
-![Manga App!](https://i.imgur.com/Ms6iX3o.png)
+![Manga App!](https://imgur.com/SqUZiRV)
 
 ### Project Overview
 
