@@ -8,8 +8,8 @@ This project represents my inaugural foray into full-stack development. For the 
 On the frontend, I harnessed the power of React with Vite and utilized useSWR for efficient data fetching. The app offers an array of features for users. You can register and log in, peruse manga content, upload your own manga creations, provide ratings for comics, and engage in discussions through comments on chapters or comics.
 
 The homepage showcases the latest uploads and popular manga selections, providing an engaging and dynamic user experience.
-![Imgur](https://imgur.com/OAPlyGR)
-![Imgur](https://imgur.com/VjA9XVc)
+![Imgur](https://i.imgur.com/VjA9XVc.png)
+![Imgur](https://i.imgur.com/f3xODeR.png)
 #### Technologies Used
 - Nestjs
 - Mongodb
